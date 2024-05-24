@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Grid } from '@mui/material';
+import Weather from '../inc/weather-info/Weatherinfo';
 
 const Footer = () => {
   return (
@@ -12,9 +13,12 @@ const Footer = () => {
       textAlign="center"
       py={3}
     >
-      <Typography variant="body1">
-        © 2024 My Website. All rights reserved.
-      </Typography>
+      <div variant="body1">
+        <Grid container spacing={2}>
+          <Grid xs={6}>© 2024 My Website. All rights reserved.</Grid>
+          <Grid xs={6}><Weather /></Grid>
+        </Grid>
+      </div>
     </Box>
   );
 };
