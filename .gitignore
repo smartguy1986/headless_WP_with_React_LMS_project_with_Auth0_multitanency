@@ -1,0 +1,59 @@
+# Ignore everything
+*
+
+# Allow wp-admin folder and its contents
+wp-admin/
+wp-admin/**
+
+# Ignore wp-includes folder
+wp-includes/
+wp-includes/**
+
+# Allow important root files
+!.gitignore
+wp-config.php
+index.php
+license.txt
+readme.html
+wp-activate.php
+wp-blog-header.php
+wp-comments-post.php
+wp-cron.php
+wp-links-opml.php
+wp-load.php
+wp-login.php
+wp-mail.php
+wp-settings.php
+wp-signup.php
+wp-trackback.php
+xmlrpc.php
+
+# Allow wp-content folder except themes starting with "twenty"
+!wp-content/
+!wp-content/plugins/
+!wp-content/plugins/**
+# !wp-content/uploads/
+# !wp-content/uploads/**
+!wp-content/themes/
+!wp-content/themes/*
+wp-content/themes/twenty*/
+
+# Ignore specific themes starting with "twenty"
+wp-content/themes/twenty*/
+
+!wp-content/themes/lms-portal/react-src/src
+wp-content/themes/lms-portal/react-src/node_modules
+wp-content/themes/lms-portal/react-src/src/.pnp
+wp-content/themes/lms-portal/react-src/src/.pnp.js
+wp-content/themes/lms-portal/react-src/src/coverage
+wp-content/themes/lms-portal/react-src/src/build
+wp-content/themes/lms-portal/react-src/src/.DS_Store
+wp-content/themes/lms-portal/react-src/src/.env.local
+wp-content/themes/lms-portal/react-src/src/.env.development.local
+wp-content/themes/lms-portal/react-src/src/.env.test.local
+wp-content/themes/lms-portal/react-src/src/.env.production.local
+
+wp-content/themes/lms-portal/react-src/src/npm-debug.log*
+wp-content/themes/lms-portal/react-src/src/yarn-debug.log*
+wp-content/themes/lms-portal/react-src/src/yarn-error.log*
+
