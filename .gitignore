@@ -41,7 +41,10 @@ wp-content/themes/twenty*/
 # Ignore specific themes starting with "twenty"
 wp-content/themes/twenty*/
 
-!wp-content/themes/lms-portal/react-src/src
+!wp-content/themes/lms-portal/react-src/
+!wp-content/themes/lms-portal/react-src/*
+!wp-content/themes/lms-portal/react-src/src/
+!wp-content/themes/lms-portal/react-src/src/*
 wp-content/themes/lms-portal/react-src/node_modules
 wp-content/themes/lms-portal/react-src/src/.pnp
 wp-content/themes/lms-portal/react-src/src/.pnp.js
