@@ -18,7 +18,7 @@ class customPosts_API_Controller extends WP_REST_Controller
     {
         register_rest_route(
             $this->base,
-            '/all/(?P<posttype>[a-zA-Z0-9]+)',
+            '/all/(?P<postType>[a-zA-Z0-9]+)',
             array(
                 'methods' => 'GET',
                 'callback' => array($this, 'an_custom_posts_get_by_type'),
@@ -47,7 +47,7 @@ class customPosts_API_Controller extends WP_REST_Controller
     {
         if (class_exists('anCustomPostsAPI')) {
             $myAPI = new anCustomPostsAPI();
-            return $myAPI->an_custom_posts_get_by_type($request['posttype']);
+            return $myAPI->an_custom_posts_get_by_type($request['postType']);
         }
         return new WP_REST_Response(array('status' => -1, 'message' => 'Success', 'data' => "No route was found matching this URL"), 200);
     }
@@ -57,6 +57,7 @@ class customPosts_API_Controller extends WP_REST_Controller
         if (!is_user_logged_in()) {
             return new WP_Error('rest_not_logged_in', esc_html__('You are not currently logged in.'), array('status' => 401));
         }
+        return true;
     }
 }
 
@@ -68,7 +69,7 @@ if (!class_exists('anCustomPostsAPI')) {
         {
         }
 
-        public function an_custom_posts_get_by_type($posttype)
+        public function an_custom_posts_get_by_type($postType)
         {
             $posts_per_page = 1;
             $offset = 0;
@@ -77,7 +78,7 @@ if (!class_exists('anCustomPostsAPI')) {
             endif;
 
             $args = array(
-                'post_type' => $posttype,
+                'post_type' => $postType,
                 'posts_per_page' => $posts_per_page,
                 'offset' => $offset,
             );

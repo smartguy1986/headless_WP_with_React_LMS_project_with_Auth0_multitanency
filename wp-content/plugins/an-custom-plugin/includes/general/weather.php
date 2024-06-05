@@ -22,7 +22,7 @@ class customWeather_API_Controller extends WP_REST_Controller
             array(
                 'methods' => 'GET',
                 'callback' => array($this, 'an_weather_service_get_current_weather'),
-                // 'permission_callback' => array($this, 'check_permissions'),
+                // 'permission_callback' => '__return_true',
             )
         );
     }
@@ -38,7 +38,10 @@ class customWeather_API_Controller extends WP_REST_Controller
 
     public function check_permissions()
     {
-        return current_user_can('read'); // Adjust permissions as needed
+        if (!is_user_logged_in()) {
+            return new WP_Error('rest_not_logged_in', esc_html__('You are not currently logged in.'), array('status' => 401));
+        }
+        return '__return_true';
     }
 }
 

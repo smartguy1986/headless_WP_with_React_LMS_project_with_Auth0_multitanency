@@ -14,5 +14,8 @@ foreach (glob(AN_ENDPOINTS_PLUGIN_DIR . 'includes/general/*.php') as $file) {
 foreach (glob(AN_ENDPOINTS_PLUGIN_DIR . 'includes/posts/*.php') as $file) {
     require_once $file;
 }
+foreach (glob(AN_ENDPOINTS_PLUGIN_DIR . 'includes/customer/*.php') as $file) {
+    require_once $file;
+}
 
 ?>

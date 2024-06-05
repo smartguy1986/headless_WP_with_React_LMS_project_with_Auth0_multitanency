@@ -33,7 +33,7 @@ export const Posts = () => {
             {posts.map(post => (
                 <div key={post.ID}>
                     <Typography variant="h4">{post.post_title}</Typography>
-                    <Typography variant="body1" dangerouslySetInnerHTML={{ __html: post.post_content }}></Typography>
+                    {/* <Typography variant="body1" dangerouslySetInnerHTML={{ __html: post.post_content }}></Typography> */}
                     {/* Add more post details */}
                 </div>
 

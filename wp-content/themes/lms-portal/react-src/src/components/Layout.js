@@ -6,6 +6,7 @@ import Footer from './Footer';
 import Homepage from '../pages/Homepage';
 import Contact from '../pages/Contact';
 import Theme from '../Theme';
+import CallbackComponent from './CallbackComponent';
 
 const Layout = () => {
   return (
@@ -18,6 +19,8 @@ const Layout = () => {
             <Route path="/" element={<Homepage />} />
             <Route path="/home" element={<Homepage />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/callback" element={<CallbackComponent />} />
+            <Route path="/moucasa" component={<Homepage />} />
           </Routes>
         </Container>
         <Footer />
