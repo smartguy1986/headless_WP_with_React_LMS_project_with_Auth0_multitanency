@@ -87,7 +87,7 @@ if (!class_exists('anCustomWeatherAPI')) {
 
             if ($response && !is_wp_error($response)) {
                 // Cache the data for 2 hours
-                set_transient($transient_key, $response, 1 * HOUR_IN_SECONDS);
+                set_transient($transient_key, $response, 10000 * HOUR_IN_SECONDS);
 
                 return new WP_REST_Response(
                     array('status' => 0, 'message' => 'Success', 'data' => $response),

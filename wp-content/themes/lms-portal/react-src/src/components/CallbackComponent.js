@@ -17,8 +17,13 @@ const CallbackComponent = () => {
                     const response = await axios.post(`${SITE_URL}/wp-json/an/auth0/login`, {
                         token: token,
                     });
-                    console.log(response);
+                    // Store user details and token in localStorage
+                    localStorage.setItem('user', JSON.stringify(user));
+                    localStorage.setItem('wp_token', response.data.token);
+                    
+                    console.log("Response ==== " + response);
                     document.cookie = `wp_token=${response.data.token}; path=/; secure; samesite=strict`;
+                    console.log("Document ==== " + document);
                     navigate('/moucasa');
                 } catch (error) {
                     console.error("Error during the token exchange:", error);

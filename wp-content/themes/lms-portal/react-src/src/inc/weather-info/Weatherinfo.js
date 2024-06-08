@@ -6,6 +6,19 @@ const Weather = () => {
     const [weatherData, setWeatherData] = useState(null);
 
     useEffect(() => {
+        const storedWeatherData = localStorage.getItem('weatherData');
+        const storedTimestamp = localStorage.getItem('weatherTimestamp');
+
+        if (storedWeatherData && storedTimestamp) {
+            const currentTime = new Date().getTime();
+            const oneDay = 24 * 60 * 60 * 1000; // One day in milliseconds
+
+            if (currentTime - storedTimestamp < oneDay) {
+                setWeatherData(JSON.parse(storedWeatherData));
+                return;
+            }
+        }
+
         fetchWeatherData();
     }, []);
 
@@ -14,6 +27,8 @@ const Weather = () => {
             .then(response => response.json())
             .then(data => {
                 setWeatherData(data);
+                localStorage.setItem('weatherData', JSON.stringify(data));
+                localStorage.setItem('weatherTimestamp', new Date().getTime());
             })
             .catch(error => {
                 console.error('Error fetching weather data:', error);

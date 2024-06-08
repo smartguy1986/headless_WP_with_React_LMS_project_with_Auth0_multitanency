@@ -11,13 +11,21 @@ import { SITE_URL } from '../Constants';
 import { LogoutButton } from './ActionButtons';
 
 const Header = () => {
-
   const navigate = useNavigate();
+  const { user, isAuthenticated, isLoading, loginWithRedirect, logout } = useAuth0();
   const [logoURL, setLogoURL] = useState('');
 
   useEffect(() => {
     fetchSiteLogo();
   }, []);
+
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      localStorage.setItem('user', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('user');
+    }
+  }, [isAuthenticated, user]);
 
   const fetchSiteLogo = () => {
     fetch(`${SITE_URL}/wp-json/an/images/sitelogo`)
@@ -30,7 +38,12 @@ const Header = () => {
       });
   };
 
-  const { user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
+  const handleLogout = () => {
+    logout({ returnTo: window.location.origin });
+    localStorage.removeItem('user');
+  };
+
+  const storedUser = JSON.parse(localStorage.getItem('user'));
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -53,11 +66,10 @@ const Header = () => {
         </Typography>
         <Button color="inherit" onClick={() => navigate('/')}>Home</Button>
         <Button color="inherit" onClick={() => navigate('/contact')}>Contact</Button>
-        {isAuthenticated ? (
+        {isAuthenticated || storedUser ? (
           <div>
-            <img src={user.picture} alt={user.name} style={{ height: '40px', borderRadius: '50%', marginRight: '10px' }} />
-            <h2>{user.name}</h2>
-            <LogoutButton />
+            <h4>{storedUser ? storedUser.email : user.email}</h4>
+            <Button color="inherit" onClick={handleLogout}>Logout</Button>
           </div>
         ) : (
           <Button color="inherit" onClick={() => loginWithRedirect()}>Login</Button>

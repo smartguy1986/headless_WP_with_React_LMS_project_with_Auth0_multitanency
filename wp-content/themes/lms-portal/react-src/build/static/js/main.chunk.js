@@ -79,16 +79,16 @@ __webpack_require__.r(__webpack_exports__);
 const theme = Object(_mui_material_styles__WEBPACK_IMPORTED_MODULE_0__["createTheme"])({
   palette: {
     primary: {
-      main: '#01204E'
+      main: '#90323D'
     },
     secondary: {
-      main: '#028391'
+      main: '#A9CBB7'
     },
     background: {
-      default: '#F6DCAC'
+      default: '#EFECCA'
     },
     warning: {
-      main: '#FEAE6F'
+      main: '#303633'
     }
   }
 });
@@ -109,7 +109,8 @@ __webpack_require__.r(__webpack_exports__);
 const auth0Config = {
   domain: "dev-r68c567whjkd1mbi.us.auth0.com",
   clientId: "E3Ymk8PYnfJRdqhL4reufSDV2PLBNtAb",
-  redirectUri: "https://127.0.0.1/moucasa"
+  redirectUri: "https://127.0.0.1/moucasa",
+  cacheLocation: "localstorage"
 };
 
 /***/ }),
@@ -202,8 +203,12 @@ const CallbackComponent = () => {
           const response = await axios__WEBPACK_IMPORTED_MODULE_3__["default"].post(`${_Constants__WEBPACK_IMPORTED_MODULE_4__["SITE_URL"]}/wp-json/an/auth0/login`, {
             token: token
           });
-          console.log(response);
+          // Store user details and token in localStorage
+          localStorage.setItem('user', JSON.stringify(user));
+          localStorage.setItem('wp_token', response.data.token);
+          console.log("Response ==== " + response);
           document.cookie = `wp_token=${response.data.token}; path=/; secure; samesite=strict`;
+          console.log("Document ==== " + document);
           navigate('/moucasa');
         } catch (error) {
           console.error("Error during the token exchange:", error);
@@ -216,7 +221,7 @@ const CallbackComponent = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32,
+      lineNumber: 37,
       columnNumber: 12
     }
   }, "Loading...");
@@ -339,10 +344,24 @@ var _jsxFileName = "C:\\xampp\\htdocs\\moucasa\\wp-content\\themes\\lms-portal\\
 
 const Header = () => {
   const navigate = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_8__["useNavigate"])();
+  const {
+    user,
+    isAuthenticated,
+    isLoading,
+    loginWithRedirect,
+    logout
+  } = Object(_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_1__["useAuth0"])();
   const [logoURL, setLogoURL] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('');
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     fetchSiteLogo();
   }, []);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    if (isAuthenticated && user) {
+      localStorage.setItem('user', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('user');
+    }
+  }, [isAuthenticated, user]);
   const fetchSiteLogo = () => {
     fetch(`${_Constants__WEBPACK_IMPORTED_MODULE_9__["SITE_URL"]}/wp-json/an/images/sitelogo`).then(response => response.json()).then(resdata => {
       setLogoURL(resdata.data);
@@ -350,18 +369,19 @@ const Header = () => {
       console.error('Error fetching sitelogo:', error);
     });
   };
-  const {
-    user,
-    isAuthenticated,
-    isLoading,
-    loginWithRedirect
-  } = Object(_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_1__["useAuth0"])();
+  const handleLogout = () => {
+    logout({
+      returnTo: window.location.origin
+    });
+    localStorage.removeItem('user');
+  };
+  const storedUser = JSON.parse(localStorage.getItem('user'));
   if (isLoading) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 36,
+        lineNumber: 49,
         columnNumber: 12
       }
     }, "Loading...");
@@ -371,14 +391,14 @@ const Header = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 40,
+      lineNumber: 53,
       columnNumber: 5
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Toolbar__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 41,
+      lineNumber: 54,
       columnNumber: 7
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_IconButton__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -389,14 +409,14 @@ const Header = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 42,
+      lineNumber: 55,
       columnNumber: 9
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_icons_material_Menu__WEBPACK_IMPORTED_MODULE_7___default.a, {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43,
+      lineNumber: 56,
       columnNumber: 11
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -411,7 +431,7 @@ const Header = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 45,
+      lineNumber: 58,
       columnNumber: 9
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -422,7 +442,7 @@ const Header = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 51,
+      lineNumber: 64,
       columnNumber: 9
     }
   }, "My Website"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -431,7 +451,7 @@ const Header = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54,
+      lineNumber: 67,
       columnNumber: 9
     }
   }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -440,51 +460,39 @@ const Header = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55,
+      lineNumber: 68,
       columnNumber: 9
     }
-  }, "Contact"), isAuthenticated ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "Contact"), isAuthenticated || storedUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57,
+      lineNumber: 70,
       columnNumber: 11
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: user.picture,
-    alt: user.name,
-    style: {
-      height: '40px',
-      borderRadius: '50%',
-      marginRight: '10px'
-    },
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 58,
+      lineNumber: 71,
       columnNumber: 13
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+  }, storedUser ? storedUser.email : user.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    color: "inherit",
+    onClick: handleLogout,
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 59,
+      lineNumber: 72,
       columnNumber: 13
     }
-  }, user.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ActionButtons__WEBPACK_IMPORTED_MODULE_10__["LogoutButton"], {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 60,
-      columnNumber: 13
-    }
-  })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, "Logout")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
     color: "inherit",
     onClick: () => loginWithRedirect(),
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 63,
+      lineNumber: 75,
       columnNumber: 11
     }
   }, "Login")));
@@ -681,11 +689,24 @@ var _jsxFileName = "C:\\xampp\\htdocs\\moucasa\\wp-content\\themes\\lms-portal\\
 const Weather = () => {
   const [weatherData, setWeatherData] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    const storedWeatherData = localStorage.getItem('weatherData');
+    const storedTimestamp = localStorage.getItem('weatherTimestamp');
+    if (storedWeatherData && storedTimestamp) {
+      const currentTime = new Date().getTime();
+      const oneDay = 24 * 60 * 60 * 1000; // One day in milliseconds
+
+      if (currentTime - storedTimestamp < oneDay) {
+        setWeatherData(JSON.parse(storedWeatherData));
+        return;
+      }
+    }
     fetchWeatherData();
   }, []);
   const fetchWeatherData = () => {
     fetch(`${_Constants__WEBPACK_IMPORTED_MODULE_1__["SITE_URL"]}/wp-json/an/general/getweather?lat=17.445049&lon=78.448502`).then(response => response.json()).then(data => {
       setWeatherData(data);
+      localStorage.setItem('weatherData', JSON.stringify(data));
+      localStorage.setItem('weatherTimestamp', new Date().getTime());
     }).catch(error => {
       console.error('Error fetching weather data:', error);
     });
@@ -695,7 +716,7 @@ const Weather = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 24,
+      lineNumber: 39,
       columnNumber: 9
     }
   }, weatherData && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_2__["Grid"], {
@@ -704,7 +725,7 @@ const Weather = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 26,
+      lineNumber: 41,
       columnNumber: 17
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_2__["Grid"], {
@@ -713,7 +734,7 @@ const Weather = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 27,
+      lineNumber: 42,
       columnNumber: 21
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_2__["Grid"], {
@@ -722,7 +743,7 @@ const Weather = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 28,
+      lineNumber: 43,
       columnNumber: 21
     }
   }, weatherData.data.weather && weatherData.data.weather[0] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -732,7 +753,7 @@ const Weather = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 30,
+      lineNumber: 45,
       columnNumber: 29
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_2__["Grid"], {
@@ -741,7 +762,7 @@ const Weather = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 37,
+      lineNumber: 52,
       columnNumber: 21
     }
   }, weatherData.data.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_2__["Grid"], {
@@ -750,7 +771,7 @@ const Weather = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 40,
+      lineNumber: 55,
       columnNumber: 21
     }
   }, weatherData.data.main.temp, "\xB0C")));
@@ -1006,5 +1027,5 @@ module.exports = __webpack_require__(/*! C:\xampp\htdocs\moucasa\wp-content\them
 
 /***/ })
 
-},[[0,"runtime-main",0]]]);
+},[[0,"runtime-main",1]]]);
 //# sourceMappingURL=main.chunk.js.map
