@@ -83,7 +83,7 @@ if (!class_exists('anCustomWeatherAPI')) {
             // If no cached data, fetch from the API
             $url = WEATHER_APP_API_URL . '?lat=' . $lat . '&lon=' . $lon . '&appid=' . WEATHER_APP_API_KEY . '&units=metric';
 
-            $response = CustomCurlRequests::makeGetRequest($url, [], 'GET', null, []);
+            $response = CustomCurlRequests::makeRequest($url, 'GET', [], null, []);
 
             if ($response && !is_wp_error($response)) {
                 // Cache the data for 2 hours
@@ -95,7 +95,7 @@ if (!class_exists('anCustomWeatherAPI')) {
                 );
             }
 
-            return new WP_REST_Response(array('status' => 0, 'message' => 'Error', 'data' => $response), 400);
+            return new WP_REST_Response(array('status' => -1, 'message' => 'Error', 'data' => $response), 400);
         }
     }
 

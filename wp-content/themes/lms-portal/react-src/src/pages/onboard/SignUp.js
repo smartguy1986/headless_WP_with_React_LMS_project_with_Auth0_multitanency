@@ -1,18 +1,20 @@
-import * as React from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom'; // Updated for react-router-dom v6
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useState, useEffect } from 'react';
+import { SITE_URL } from '../../Constants';
+import createUser from '../../commonfunctions/CreateUser';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 // Define the Copyright component
 const Copyright = (props) => {
@@ -20,7 +22,7 @@ const Copyright = (props) => {
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
             {'Copyright © '}
             <Link color="inherit" href="https://yourwebsite.com/">
-            Moucasa LMS
+                Moucasa LMS
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
@@ -30,21 +32,62 @@ const Copyright = (props) => {
 
 const SignUp = () => {
     const defaultTheme = createTheme();
+    const [logoURL, setLogoURL] = useState('');
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+    const [snackbarSeverity, setSnackbarSeverity] = useState('success');
 
-    // Update to useNavigate hook
+    useEffect(() => {
+        fetchSiteLogo();
+    }, []);
+
     const navigate = useNavigate();
 
     const handleSignInClick = () => {
         navigate('/signin'); // Updated to use navigate
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        // const formData = new FormData(event.currentTarget);
+        // const formDataObject = Object.fromEntries(formData.entries());
+        const formData = {
+            firstName: event.currentTarget.firstName.value,
+            lastName: event.currentTarget.lastName.value,
+            email: event.currentTarget.email.value,
+            password: event.currentTarget.password.value,
+        };
+
+        try {
+            const response = await createUser(formData);
+            console.log('User creation response:', response);
+            if (response.message) {
+                setSnackbarMessage('You have registered successfully! Please sign in.');
+                setSnackbarSeverity('success');
+                setSnackbarOpen(true);
+                setTimeout(() => navigate('/signin'), 3000); // Redirect after 3 seconds
+            }
+        } catch (error) {
+            setSnackbarMessage('Error creating user.');
+            setSnackbarSeverity('error');
+            setSnackbarOpen(true);
+            console.error('Error creating user:', error);
+        }
+    };
+
+    const fetchSiteLogo = () => {
+        fetch(`${SITE_URL}/wp-json/an/images/sitelogo`)
+            .then(response => response.json())
+            .then(resdata => {
+                setLogoURL(resdata.data);
+            })
+            .catch(error => {
+                console.error('Error fetching sitelogo:', error);
+            });
+    };
+
+    const handleCloseSnackbar = () => {
+        setSnackbarOpen(false);
     };
 
     return (
@@ -59,11 +102,16 @@ const SignUp = () => {
                         alignItems: 'center',
                     }}
                 >
-                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                        <LockOutlinedIcon />
+                    <Avatar sx={{ m: 1, bgcolor: 'rgba(0, 0, 0, 0)' }}>
+                        <img
+                            src={logoURL}
+                            alt="Logo"
+                            style={{ width: '100%', height: 'auto' }}
+                        />
                     </Avatar>
+
                     <Typography component="h1" variant="h5">
-                        Sign up
+                        Register your company
                     </Typography>
                     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
@@ -109,12 +157,12 @@ const SignUp = () => {
                                     autoComplete="new-password"
                                 />
                             </Grid>
-                            <Grid item xs={12}>
+                            {/* <Grid item xs={12}>
                                 <FormControlLabel
                                     control={<Checkbox value="allowExtraEmails" color="primary" />}
                                     label="I want to receive inspiration, marketing promotions and updates via email."
                                 />
-                            </Grid>
+                            </Grid> */}
                         </Grid>
                         <Button
                             type="submit"
@@ -134,6 +182,16 @@ const SignUp = () => {
                     </Box>
                 </Box>
                 <Copyright sx={{ mt: 5 }} />
+                <Snackbar
+                    open={snackbarOpen}
+                    autoHideDuration={6000}
+                    onClose={handleCloseSnackbar}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                >
+                    <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity} sx={{ width: '100%' }}>
+                        {snackbarMessage}
+                    </Alert>
+                </Snackbar>
             </Container>
         </ThemeProvider>
     );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import Weather from '../inc/weather-info/Weatherinfo';
 
 const Footer = () => {
