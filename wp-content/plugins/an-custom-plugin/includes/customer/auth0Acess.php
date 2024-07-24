@@ -63,7 +63,7 @@ class customAuth0_API_Controller extends WP_REST_Controller
             $myAPI = new anCustomAuth0API($this->config);
             return $myAPI->an_custom_auth0_token_generate();
         }
-        return new WP_REST_Response(array('status' => -1, 'message' => 'No route was found matching this URL'), 404);
+        wp_send_json(array('status' => -1, 'message' => 'No route was found matching this URL'), 404);
     }
 
     public function an_custom_auth0_create_user($request)
@@ -72,7 +72,7 @@ class customAuth0_API_Controller extends WP_REST_Controller
             $myAPI = new anCustomAuth0API($this->config);
             return $myAPI->an_custom_auth0_create_user($request->get_json_params());
         }
-        return new WP_REST_Response(array('status' => -1, 'message' => 'No route was found matching this URL'), 404);
+        wp_send_json(array('status' => -1, 'message' => 'No route was found matching this URL'), 404);
     }
 
     public function an_custom_auth0_remove_user($request)
@@ -81,7 +81,7 @@ class customAuth0_API_Controller extends WP_REST_Controller
             $myAPI = new anCustomAuth0API($this->config);
             return $myAPI->an_custom_auth0_remove_user($request['userId']);
         }
-        return new WP_REST_Response(array('status' => -1, 'message' => 'No route was found matching this URL'), 404);
+        wp_send_json(array('status' => -1, 'message' => 'No route was found matching this URL'), 404);
     }
 
     public function check_permissions()
@@ -107,7 +107,7 @@ if (!class_exists('anCustomAuth0API')) {
         public function an_custom_auth0_token_generate()
         {
             if (empty($this->config)) {
-                return new WP_REST_Response(
+                wp_send_json(
                     array('status' => -1, 'message' => 'Auth0 credentials not configured!'),
                     400
                 );
@@ -131,9 +131,9 @@ if (!class_exists('anCustomAuth0API')) {
             $url = 'https://' . $this->config['AUTH_DOMAIN'] . '/oauth/token';
 
             $response = CustomCurlRequests::makeRequest($url, 'POST', [], $data);
-            
+
             if (empty($response['access_token']) || empty($response['expires_in'])) {
-                return new WP_REST_Response(
+                wp_send_json(
                     array('status' => -1, 'message' => 'Failed to generate access token!'),
                     400
                 );
@@ -146,20 +146,21 @@ if (!class_exists('anCustomAuth0API')) {
 
             return $accessToken;
 
-            // return new WP_REST_Response(array('status' => 0, 'message' => 'Success', 'data' => $accessToken), 200);
+            // wp_send_json(array('status' => 0, 'message' => 'Success', 'data' => $accessToken), 200);
         }
 
         public function an_custom_auth0_create_user($post_data)
         {
             if (empty($this->config)) {
-                return new WP_REST_Response(
+                wp_send_json(
                     array('status' => -1, 'message' => 'Auth0 credentials not configured!'),
                     400
                 );
             }
-
+            capture_log_data('Auth0 Data', json_encode($post_data));
+            
             $accessToken = $this->an_custom_auth0_token_generate();
-
+            capture_log_data('Auth0 Token', $accessToken);
             $user_data = [
                 "email" => $post_data['email'],
                 "user_metadata" => [
@@ -180,33 +181,58 @@ if (!class_exists('anCustomAuth0API')) {
             ];
 
             $url = 'https://' . $this->config['AUTH_DOMAIN'] . '/api/v2/users';
+            // Log the user data and URL for debugging
+            capture_log_data('User data', json_encode($user_data));
+            capture_log_data('Auth0 URL', $url);
 
             $response = CustomCurlRequests::makeRequest($url, 'POST', [], $user_data, $accessToken);
+            capture_log_data('API Response', json_encode($response));
+            // Log the response for debugging
+            
 
-            if (!empty($response)) :
-                // $email, $firstname, $lastname, $password, $account_id, $created_at, $auth0user_id, $roles
-                do_action('create_custom_user_in_wp', $response['email'], $response['given_name'], $response['family_name'], $post_data['password'], $response['identities']->user_id, $response['created_at'], $response['user_id'], $response['user_metadata']['roles']);
-                return new WP_REST_Response(array('status' => 0, 'message' => $response), 200);
-            else :
-                return new WP_REST_Response(array('status' => -1, 'message' => 'Something went wrong!'), 400);
-            endif;
+            if (is_wp_error($response)) {
+                wp_send_json(
+                    array('status' => -1, 'message' => $response->get_error_message()),
+                    400
+                );
+            }
+
+            if (!empty($response)) {
+                // Extract relevant data from the response
+                $resp = create_custom_user_in_wp_function(
+                    $response['email'],
+                    $response['given_name'],
+                    $response['family_name'],
+                    $post_data['password'],
+                    $response['user_id'], // Assuming this is the correct field
+                    $response['created_at'],
+                    $response['user_id'],
+                    $response['user_metadata']['roles']
+                );
+                capture_log_data('WP Response', $resp);
+                // wp_send_json(array('status' => 0, 'message' => $resp));
+                wp_send_json(array('status' => 0, 'message' => $resp), 200);
+            } else {
+                wp_send_json(array('status' => -1, 'message' => 'Something went wrong!'), 400);
+            }
         }
+
 
         public function an_custom_auth0_remove_user($userId)
         {
             if (empty($this->config)) {
-                return new WP_REST_Response(
+                wp_send_json(
                     array('status' => -1, 'message' => 'Auth0 credentials not configured!'),
                     400
                 );
             }
             $accessToken = $this->an_custom_auth0_token_generate();
-            
+
             $url = 'https://' . $this->config['AUTH_DOMAIN'] . '/api/v2/users/' . $userId;
 
             $response = CustomCurlRequests::makeRequest($url, 'DELETE', [], null, $accessToken);
 
-            return new WP_REST_Response(array('status' => 0, 'message' => 'Success', 'data' => $response), 200);
+            wp_send_json(array('status' => 0, 'message' => 'Success', 'data' => $response), 200);
         }
     }
 }
@@ -216,7 +242,7 @@ if (!class_exists('anCustomAuth0API')) {
 //     $config = require __DIR__ . './auth0Config.php';
 
 //     if (empty($config)) {
-//         return new WP_REST_Response(
+//         wp_send_json(
 //             array('status' => -1, 'message' => 'Auth0 credentials not configured!'),
 //             400
 //         );

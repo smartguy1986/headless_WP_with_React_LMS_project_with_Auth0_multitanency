@@ -1877,7 +1877,7 @@ const SignUp = () => {
       lineNumber: 113,
       columnNumber: 21
     }
-  }, "Register your company"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Box__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, "Register your Company"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Box__WEBPACK_IMPORTED_MODULE_8__["default"], {
     component: "form",
     noValidate: true,
     onSubmit: handleSubmit,
@@ -2086,5 +2086,5 @@ module.exports = __webpack_require__(/*! C:\xampp\htdocs\moucasa\wp-content\them
 
 /***/ })
 
-},[[0,"runtime-main",1]]]);
+},[[0,"runtime-main",0]]]);
 //# sourceMappingURL=main.chunk.js.map
