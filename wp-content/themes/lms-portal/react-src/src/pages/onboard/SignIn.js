@@ -42,7 +42,7 @@ const SignIn = () => {
     };
 
     const handleSignUpClick = () => {
-        navigate('/signup'); // Navigate to SignUp page
+        navigate('/'); // Navigate to SignUp page
     };
 
     const handleForgotPasswordClick = () => {

@@ -39,7 +39,7 @@
         Learn how to configure a non-root public URL by running `npm run wpbuild`.
     -->
     <title>React WordPress Theme</title>
-<link href="/moucasa/wp-content/themes/lms-portal/static/css/main.chunk.css?1161199736d434c6d98a" rel="stylesheet"></head>
+<link href="/moucasa/wp-content/themes/lms-portal/static/css/main.chunk.css?60072363e839afc26c45" rel="stylesheet"></head>
     <body>
     <noscript>
         You need to enable JavaScript to run this app.
@@ -55,5 +55,5 @@
         To begin the development, run `npm run wpstart` or `yarn wpstart`.
         To create a production bundle, use `npm run wpbuild` or `yarn wpbuild`.
     -->
-    <script src="/moucasa/wp-content/themes/lms-portal/static/js/bundle.js?1161199736d434c6d98a"></script><script src="/moucasa/wp-content/themes/lms-portal/static/js/0.chunk.js?1161199736d434c6d98a"></script><script src="/moucasa/wp-content/themes/lms-portal/static/js/main.chunk.js?1161199736d434c6d98a"></script></body>
+    <script src="/moucasa/wp-content/themes/lms-portal/static/js/bundle.js?60072363e839afc26c45"></script><script src="/moucasa/wp-content/themes/lms-portal/static/js/0.chunk.js?60072363e839afc26c45"></script><script src="/moucasa/wp-content/themes/lms-portal/static/js/main.chunk.js?60072363e839afc26c45"></script></body>
 </html>

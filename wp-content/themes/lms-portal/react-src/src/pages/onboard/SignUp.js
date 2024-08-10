@@ -1,5 +1,6 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Updated for react-router-dom v6
+import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,19 +17,16 @@ import createUser from '../../commonfunctions/CreateUser';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
-// Define the Copyright component
-const Copyright = (props) => {
-    return (
-        <Typography variant="body2" color="text.secondary" align="center" {...props}>
-            {'Copyright © '}
-            <Link color="inherit" href="https://yourwebsite.com/">
-                Moucasa LMS
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-};
+const Copyright = (props) => (
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+        {'Copyright © '}
+        <Link color="inherit" href="https://yourwebsite.com/">
+            Moucasa LMS
+        </Link>{' '}
+        {new Date().getFullYear()}
+        {'.'}
+    </Typography>
+);
 
 const SignUp = () => {
     const defaultTheme = createTheme();
@@ -37,20 +35,16 @@ const SignUp = () => {
     const [snackbarMessage, setSnackbarMessage] = useState('');
     const [snackbarSeverity, setSnackbarSeverity] = useState('success');
 
+    const { loginWithRedirect } = useAuth0();
+
     useEffect(() => {
         fetchSiteLogo();
     }, []);
 
     const navigate = useNavigate();
 
-    const handleSignInClick = () => {
-        navigate('/signin'); // Updated to use navigate
-    };
-
     const handleSubmit = async (event) => {
         event.preventDefault();
-        // const formData = new FormData(event.currentTarget);
-        // const formDataObject = Object.fromEntries(formData.entries());
         const formData = {
             firstName: event.currentTarget.firstName.value,
             lastName: event.currentTarget.lastName.value,
@@ -65,7 +59,7 @@ const SignUp = () => {
                 setSnackbarMessage('You have registered successfully! Please sign in.');
                 setSnackbarSeverity('success');
                 setSnackbarOpen(true);
-                setTimeout(() => navigate('/signin'), 3000); // Redirect after 3 seconds
+                // setTimeout(() => navigate('/signin'), 3000);
             }
         } catch (error) {
             setSnackbarMessage('Error creating user.');
@@ -78,12 +72,8 @@ const SignUp = () => {
     const fetchSiteLogo = () => {
         fetch(`${SITE_URL}/wp-json/an/images/sitelogo`)
             .then(response => response.json())
-            .then(resdata => {
-                setLogoURL(resdata.data);
-            })
-            .catch(error => {
-                console.error('Error fetching sitelogo:', error);
-            });
+            .then(resdata => setLogoURL(resdata.data))
+            .catch(error => console.error('Error fetching sitelogo:', error));
     };
 
     const handleCloseSnackbar = () => {
@@ -103,16 +93,9 @@ const SignUp = () => {
                     }}
                 >
                     <Avatar sx={{ m: 1, bgcolor: 'rgba(0, 0, 0, 0)' }}>
-                        <img
-                            src={logoURL}
-                            alt="Logo"
-                            style={{ width: '100%', height: 'auto' }}
-                        />
+                        <img src={logoURL} alt="Logo" style={{ width: '100%', height: 'auto' }} />
                     </Avatar>
-
-                    <Typography component="h1" variant="h5">
-                        Register your Company
-                    </Typography>
+                    <Typography component="h1" variant="h5">Register your Company</Typography>
                     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
@@ -157,12 +140,6 @@ const SignUp = () => {
                                     autoComplete="new-password"
                                 />
                             </Grid>
-                            {/* <Grid item xs={12}>
-                                <FormControlLabel
-                                    control={<Checkbox value="allowExtraEmails" color="primary" />}
-                                    label="I want to receive inspiration, marketing promotions and updates via email."
-                                />
-                            </Grid> */}
                         </Grid>
                         <Button
                             type="submit"
@@ -174,7 +151,7 @@ const SignUp = () => {
                         </Button>
                         <Grid container justifyContent="flex-end">
                             <Grid item>
-                                <Link href="#" variant="body2" onClick={handleSignInClick}>
+                                <Link href="#" variant="body2" onClick={() => loginWithRedirect()}>
                                     Already have an account? Sign in
                                 </Link>
                             </Grid>

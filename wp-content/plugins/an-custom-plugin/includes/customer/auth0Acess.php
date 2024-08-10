@@ -3,7 +3,9 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-require_once __DIR__ . '../../../../../../vendor/autoload.php';
+// require_once __DIR__ . '../../../../../../vendor/autoload.php';
+
+// use \Firebase\JWT\JWT;
 
 add_action('rest_api_init', 'an_register_auth0_service', 20);
 
@@ -32,7 +34,7 @@ class customAuth0_API_Controller extends WP_REST_Controller
             array(
                 'methods' => 'POST',
                 'callback' => array($this, 'an_custom_auth0_token_generate'),
-                'permission_callback' => '__return_true',
+                'permission_callback' => '__return_true', // Allow public access
             )
         );
 
@@ -63,7 +65,7 @@ class customAuth0_API_Controller extends WP_REST_Controller
             $myAPI = new anCustomAuth0API($this->config);
             return $myAPI->an_custom_auth0_token_generate();
         }
-        wp_send_json(array('status' => -1, 'message' => 'No route was found matching this URL'), 404);
+        return new WP_REST_Response(array('status' => -1, 'message' => 'No route was found matching this URL'), 404);
     }
 
     public function an_custom_auth0_create_user($request)
@@ -106,8 +108,9 @@ if (!class_exists('anCustomAuth0API')) {
 
         public function an_custom_auth0_token_generate()
         {
+            // Check if Auth0 credentials are configured
             if (empty($this->config)) {
-                wp_send_json(
+                return new WP_REST_Response(
                     array('status' => -1, 'message' => 'Auth0 credentials not configured!'),
                     400
                 );
@@ -115,12 +118,17 @@ if (!class_exists('anCustomAuth0API')) {
 
             // Check if the access token is already stored in a transient
             $accessToken = get_transient('auth0_access_token');
-
-            // If the access token is not found or expired, generate a new one
-            if ($accessToken || !empty($accessToken)) {
-                return $accessToken;
+            error_log("access_token_arijit = ". json_encode($accessToken));
+            // If the access token is found and valid, return it
+            if (!empty($accessToken)) {
+                capture_log_data('Auth0 Token1', $accessToken);
+                return new WP_REST_Response(
+                    array('status' => 0, 'message' => 'Success', 'access_token' => $accessToken),
+                    200
+                );
             }
 
+            // Prepare the data for the token request
             $data = array(
                 'client_id' => $this->config['AUTH_CLINET_ID'],
                 'client_secret' => $this->config['AUTH_CLIENT_SECRET'],
@@ -128,26 +136,35 @@ if (!class_exists('anCustomAuth0API')) {
                 'grant_type' => 'client_credentials'
             );
 
+            // Auth0 token URL
             $url = 'https://' . $this->config['AUTH_DOMAIN'] . '/oauth/token';
 
+            // Make the request using the CustomCurlRequests class
             $response = CustomCurlRequests::makeRequest($url, 'POST', [], $data);
 
-            if (empty($response['access_token']) || empty($response['expires_in'])) {
-                wp_send_json(
+            // Handle errors in response
+            if (empty($response) || empty($response['access_token']) || empty($response['expires_in'])) {
+                return new WP_REST_Response(
                     array('status' => -1, 'message' => 'Failed to generate access token!'),
                     400
                 );
             }
+
+            // Extract the access token and expiration time from the response
             $accessToken = $response['access_token'];
             $expiresIn = $response['expires_in'];
 
-            // Store the access token in a transient with an expiry time
+            // Store the access token in a transient with the correct expiry time
             set_transient('auth0_access_token', $accessToken, $expiresIn);
-
-            return $accessToken;
-
-            // wp_send_json(array('status' => 0, 'message' => 'Success', 'data' => $accessToken), 200);
+            capture_log_data('Auth0 Token1', $accessToken);
+            error_log("access_token_nandi = ". json_encode($accessToken));
+            // Return the access token in the response
+            return new WP_REST_Response(
+                array('status' => 0, 'message' => 'Success', 'access_token' => $accessToken),
+                200
+            );
         }
+
 
         public function an_custom_auth0_create_user($post_data)
         {
@@ -158,8 +175,9 @@ if (!class_exists('anCustomAuth0API')) {
                 );
             }
             capture_log_data('Auth0 Data', json_encode($post_data));
-            
+
             $accessToken = $this->an_custom_auth0_token_generate();
+            return json_encode($accessToken);
             capture_log_data('Auth0 Token', $accessToken);
             $user_data = [
                 "email" => $post_data['email'],
@@ -188,7 +206,7 @@ if (!class_exists('anCustomAuth0API')) {
             $response = CustomCurlRequests::makeRequest($url, 'POST', [], $user_data, $accessToken);
             capture_log_data('API Response', json_encode($response));
             // Log the response for debugging
-            
+
 
             if (is_wp_error($response)) {
                 wp_send_json(

@@ -8,9 +8,10 @@ import { SITE_URL } from '../Constants';
 const CallbackComponent = () => {
     const { isAuthenticated, getAccessTokenSilently, user } = useAuth0();
     const navigate = useNavigate();
-
+    
     useEffect(() => {
         const handleLogin = async () => {
+            console.log("aaaa====="+isAuthenticated);
             if (isAuthenticated && user) {
                 try {
                     const token = await getAccessTokenSilently();
@@ -29,6 +30,7 @@ const CallbackComponent = () => {
                     console.error("Error during the token exchange:", error);
                 }
             }
+            console.log("nah re hayni");
         };
 
         handleLogin();
