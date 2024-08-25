@@ -1,5 +1,6 @@
 import React from 'react';
 import { Typography } from '@mui/material';
+import { Posts } from './Posts';
 
 const Homepage = () => {
   return (
@@ -10,6 +11,9 @@ const Homepage = () => {
       <Typography variant="body1">
         Welcome to the home page!
       </Typography>
+      <div>
+        <Posts />
+      </div>
     </div>
   );
 };
