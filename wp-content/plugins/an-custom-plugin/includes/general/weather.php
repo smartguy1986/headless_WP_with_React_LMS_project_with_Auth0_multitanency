@@ -58,7 +58,7 @@ if (!class_exists('anCustomWeatherAPI')) {
         {
             $lat = sanitize_text_field($request->get_param('lat'));
             $lon = sanitize_text_field($request->get_param('lon'));
-
+            error_log('abcd====' . $request->get_param('lat'));
             if (empty($lat) || empty($lon)) {
                 return new WP_REST_Response(
                     array('status' => -1, 'message' => 'Latitude and Longitude are required.'),
@@ -98,5 +98,4 @@ if (!class_exists('anCustomWeatherAPI')) {
             return new WP_REST_Response(array('status' => -1, 'message' => 'Error', 'data' => $response), 400);
         }
     }
-
 }

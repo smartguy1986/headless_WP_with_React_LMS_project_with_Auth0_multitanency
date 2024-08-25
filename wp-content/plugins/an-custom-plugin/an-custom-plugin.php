@@ -4,7 +4,7 @@ Plugin Name: AN Endpoints Plugin
 Description: Custom REST Endpoints for React Frontend
 Version: 1.0
 Author: Arijit Nandi
-Created on: 2024-05-24 17:18:03
+Created on: 2024-08-25 16:35:47
 */
 
 include_once(plugin_dir_path(__FILE__) . 'url-config.php');

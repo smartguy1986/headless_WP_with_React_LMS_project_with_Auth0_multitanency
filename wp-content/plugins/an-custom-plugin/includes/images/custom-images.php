@@ -65,10 +65,7 @@ if (!class_exists('anCustomImagesAPI')) {
 
     class anCustomImagesAPI
     {
-        public function __construct()
-        {
-
-        }
+        public function __construct() {}
         public function an_image_service_get_custom_logo()
         {
             // Logic for the custom logo endpoint
@@ -85,7 +82,6 @@ if (!class_exists('anCustomImagesAPI')) {
             }
 
             return new WP_REST_Response(array('status' => 0, 'message' => 'Error', 'data' => $logo_url), 400);
-
         }
 
         public function an_image_service_get_banner_images()
@@ -129,8 +125,6 @@ if (!class_exists('anCustomImagesAPI')) {
             // Return the image array as a JSON response
             $response = new WP_REST_Response(array('status' => 0, 'message' => 'Success', 'data' => $image_arr), 200);
             return $response;
-
-
         }
     }
 }

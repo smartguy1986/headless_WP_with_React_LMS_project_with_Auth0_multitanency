@@ -1,17 +1,16 @@
 <?php
 function allow_my_custom_origins($headers)
 {
-    $headers['Access-Control-Allow-Origin'] = 'https://127.0.0.1'; // Change this to your React app domain
-    $headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE';
+    $headers['Access-Control-Allow-Origin'] = 'http://127.0.0.1'; // Change this to your React app domain
+    $headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, PATCH, DELETE';
     $headers['Access-Control-Allow-Credentials'] = 'true';
-    // $headers['Content-Type'] = 'application/json';
     return $headers;
 }
 
-add_filter('rest_api_init', function () {
-    remove_filter('rest_pre_serve_request', 'rest_send_cors_headers');
-    add_filter('rest_pre_serve_request', 'allow_my_custom_origins');
-}, 15);
+// add_filter('rest_api_init', function () {
+//     remove_filter('rest_pre_serve_request', 'rest_send_cors_headers');
+//     add_filter('rest_pre_serve_request', 'allow_my_custom_origins');
+// }, 15);
 
 add_action("create_custom_user_in_wp", "create_custom_user_in_wp_function", 10, 8);
 
@@ -87,6 +86,18 @@ function generateRandomString($length = 8)
 }
 
 
+function generate_unique_profile_id()
+{
+    $letters = 'abcdefghijklmnopqrstuvwxyz';
+    $numbers = '0123456789';
+    $small_letters = substr(str_shuffle(strtolower($letters)), 0, 6);
+    $capital_letters = strtoupper(substr(str_shuffle($numbers . $letters), 0, 16));
+    $numbers_part = substr(str_shuffle($numbers . $letters), 0, 10);
+
+    return $small_letters . $capital_letters . $numbers_part;
+}
+
+
 function create_custom_user_in_wp_function($email, $firstname, $lastname, $password, $account_id, $created_at, $auth0user_id, $roles)
 {
     // Sanitize input fields
@@ -115,7 +126,6 @@ function create_custom_user_in_wp_function($email, $firstname, $lastname, $passw
 
         // Log the error message for debugging
         error_log('WP_Error: ' . $user_id->get_error_message());
-        capture_log_data('WP Error', $user_id->get_error_message());
         // Remove the custom Auth0 user
         $authOps->an_custom_auth0_remove_user(urlencode($auth0user_id));
 
@@ -135,7 +145,6 @@ function create_custom_user_in_wp_function($email, $firstname, $lastname, $passw
     if (is_wp_error($user_update)) {
         // Log the error message for debugging
         error_log('WP_Error during user update: ' . $user_update->get_error_message());
-        capture_log_data('WP_Error during user update', $user_update->get_error_message());
         // Return the error message
         return json_encode(array('status' => 'error', 'message' => $user_update->get_error_message()));
     }
@@ -151,34 +160,4 @@ function create_custom_user_in_wp_function($email, $firstname, $lastname, $passw
 
     // Return success response
     return array('status' => 'success', 'message' => 'User created successfully.', 'user_id' => $user_id, 'profile_id' => $profile_id);
-}
-
-
-function generate_unique_profile_id()
-{
-    $letters = 'abcdefghijklmnopqrstuvwxyz';
-    $numbers = '0123456789';
-    $small_letters = substr(str_shuffle(strtolower($letters)), 0, 6);
-    $capital_letters = strtoupper(substr(str_shuffle($numbers . $letters), 0, 16));
-    $numbers_part = substr(str_shuffle($numbers . $letters), 0, 10);
-
-    return $small_letters . $capital_letters . $numbers_part;
-}
-
-function capture_log_data($error_title, $error_message)
-{
-    global $wpdb;
-
-    $log_data = array(
-        "error_title" => $error_title,
-        "error_message" => $error_message
-    );
-
-    $table_name = $wpdb->prefix . 'error_logs';
-
-    $wpdb->insert(
-        $table_name,
-        $log_data,
-        array('%s', '%s') // Data formats for each field
-    );
 }

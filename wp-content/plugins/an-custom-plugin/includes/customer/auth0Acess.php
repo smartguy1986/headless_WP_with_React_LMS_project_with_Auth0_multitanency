@@ -118,10 +118,9 @@ if (!class_exists('anCustomAuth0API')) {
 
             // Check if the access token is already stored in a transient
             $accessToken = get_transient('auth0_access_token');
-            error_log("access_token_arijit = ". json_encode($accessToken));
+            error_log("access_token_arijit = " . json_encode($accessToken));
             // If the access token is found and valid, return it
             if (!empty($accessToken)) {
-                capture_log_data('Auth0 Token1', $accessToken);
                 return new WP_REST_Response(
                     array('status' => 0, 'message' => 'Success', 'access_token' => $accessToken),
                     200
@@ -143,12 +142,13 @@ if (!class_exists('anCustomAuth0API')) {
             $response = CustomCurlRequests::makeRequest($url, 'POST', [], $data);
 
             // Handle errors in response
-            if (empty($response) || empty($response['access_token']) || empty($response['expires_in'])) {
+            if (!is_array($response) || empty($response['access_token']) || empty($response['expires_in'])) {
                 return new WP_REST_Response(
                     array('status' => -1, 'message' => 'Failed to generate access token!'),
                     400
                 );
             }
+
 
             // Extract the access token and expiration time from the response
             $accessToken = $response['access_token'];
@@ -156,8 +156,7 @@ if (!class_exists('anCustomAuth0API')) {
 
             // Store the access token in a transient with the correct expiry time
             set_transient('auth0_access_token', $accessToken, $expiresIn);
-            capture_log_data('Auth0 Token1', $accessToken);
-            error_log("access_token_nandi = ". json_encode($accessToken));
+            error_log("access_token_nandi = " . json_encode($accessToken));
             // Return the access token in the response
             return new WP_REST_Response(
                 array('status' => 0, 'message' => 'Success', 'access_token' => $accessToken),
@@ -174,11 +173,12 @@ if (!class_exists('anCustomAuth0API')) {
                     400
                 );
             }
-            capture_log_data('Auth0 Data', json_encode($post_data));
 
-            $accessToken = $this->an_custom_auth0_token_generate();
-            return json_encode($accessToken);
-            capture_log_data('Auth0 Token', $accessToken);
+            $resp = $this->an_custom_auth0_token_generate();
+            // Extract the data from the WP_REST_Response object
+            $response_data = $resp->get_data();
+            $accessToken = $response_data['access_token'];
+            
             $user_data = [
                 "email" => $post_data['email'],
                 "user_metadata" => [
@@ -199,12 +199,8 @@ if (!class_exists('anCustomAuth0API')) {
             ];
 
             $url = 'https://' . $this->config['AUTH_DOMAIN'] . '/api/v2/users';
-            // Log the user data and URL for debugging
-            capture_log_data('User data', json_encode($user_data));
-            capture_log_data('Auth0 URL', $url);
-
+            
             $response = CustomCurlRequests::makeRequest($url, 'POST', [], $user_data, $accessToken);
-            capture_log_data('API Response', json_encode($response));
             // Log the response for debugging
 
 
@@ -227,7 +223,6 @@ if (!class_exists('anCustomAuth0API')) {
                     $response['user_id'],
                     $response['user_metadata']['roles']
                 );
-                capture_log_data('WP Response', $resp);
                 // wp_send_json(array('status' => 0, 'message' => $resp));
                 wp_send_json(array('status' => 0, 'message' => $resp), 200);
             } else {
