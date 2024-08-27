@@ -108,9 +108,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "auth0Config", function() { return auth0Config; });
 const auth0Config = {
   domain: "dev-r68c567whjkd1mbi.us.auth0.com",
-  clientId: "ccx75StLbKg8Og8SzEvsvjM1h4WCtetG",
-  clientSecret: "2D2jdddCCSKFFSbyemJAOKlnW33D7H81VtGkqeSBnoswp0SngkETNNFNuHc7LiEI",
-  redirectUri: "https://127.0.0.1/moucasa/callback",
+  clientId: "SJrbL8AVe6NJgY9C8pCl1dfddeJwGBqu",
+  clientSecret: "tVQJsAp41BUU4AAmF3biphURBc9xnjXjErCWEINmnHrPTr9FBA6gFtMZltsUwb-x",
+  redirectUri: "https://127.0.0.1/moucasa",
   cacheLocation: "localstorage"
 };
 
@@ -158,72 +158,6 @@ const createUser = async props => {
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (createUser);
-
-/***/ }),
-
-/***/ "./src/components/CallbackComponent.js":
-/*!*********************************************!*\
-  !*** ./src/components/CallbackComponent.js ***!
-  \*********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _auth0_auth0_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @auth0/auth0-react */ "./node_modules/@auth0/auth0-react/dist/auth0-react.esm.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var _Constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Constants */ "./src/Constants.js");
-var _jsxFileName = "C:\\xampp\\htdocs\\moucasa\\wp-content\\themes\\lms-portal\\react-src\\src\\components\\CallbackComponent.js";
-// CallbackComponent.js
-
-
-
-
-
-const CallbackComponent = () => {
-  const {
-    isAuthenticated,
-    getAccessTokenSilently,
-    user
-  } = Object(_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_1__["useAuth0"])();
-  const navigate = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useNavigate"])();
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    const handleLogin = async () => {
-      console.log("aaaa=====" + isAuthenticated);
-      if (isAuthenticated && user) {
-        try {
-          const token = await getAccessTokenSilently();
-          const response = await axios__WEBPACK_IMPORTED_MODULE_3__["default"].post(`${_Constants__WEBPACK_IMPORTED_MODULE_4__["SITE_URL"]}/wp-json/an/auth0/login`, {
-            token: token
-          });
-          // Store user details and token in localStorage
-          localStorage.setItem('user', JSON.stringify(user));
-          localStorage.setItem('wp_token', response.data.token);
-          console.log("Response ==== " + response);
-          document.cookie = `wp_token=${response.data.token}; path=/; secure; samesite=strict`;
-          console.log("Document ==== " + document);
-          navigate('/moucasa');
-        } catch (error) {
-          console.error("Error during the token exchange:", error);
-        }
-      }
-      console.log("nah re hayni");
-    };
-    handleLogin();
-  }, [isAuthenticated, user, getAccessTokenSilently, navigate]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 39,
-      columnNumber: 12
-    }
-  }, "Loading...");
-};
-/* harmony default export */ __webpack_exports__["default"] = (CallbackComponent);
 
 /***/ }),
 
@@ -507,23 +441,21 @@ const Header = () => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _auth0_auth0_react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @auth0/auth0-react */ "./node_modules/@auth0/auth0-react/dist/auth0-react.esm.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
-/* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Header */ "./src/components/Header.js");
-/* harmony import */ var _Footer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Footer */ "./src/components/Footer.js");
-/* harmony import */ var _pages_Homepage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../pages/Homepage */ "./src/pages/Homepage.js");
-/* harmony import */ var _pages_Contact__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../pages/Contact */ "./src/pages/Contact.js");
-/* harmony import */ var _Theme__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Theme */ "./src/Theme.js");
-/* harmony import */ var _pages_onboard_Callback__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../pages/onboard/Callback */ "./src/pages/onboard/Callback.js");
-/* harmony import */ var _pages_onboard_SignIn__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../pages/onboard/SignIn */ "./src/pages/onboard/SignIn.js");
-/* harmony import */ var _pages_onboard_SignUp__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../pages/onboard/SignUp */ "./src/pages/onboard/SignUp.js");
-/* harmony import */ var _pages_onboard_ForgotPassword__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../pages/onboard/ForgotPassword */ "./src/pages/onboard/ForgotPassword.js");
-/* harmony import */ var _CallbackComponent__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./CallbackComponent */ "./src/components/CallbackComponent.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Header */ "./src/components/Header.js");
+/* harmony import */ var _Footer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Footer */ "./src/components/Footer.js");
+/* harmony import */ var _pages_Homepage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../pages/Homepage */ "./src/pages/Homepage.js");
+/* harmony import */ var _pages_Contact__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../pages/Contact */ "./src/pages/Contact.js");
+/* harmony import */ var _Theme__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Theme */ "./src/Theme.js");
+/* harmony import */ var _pages_onboard_Callback__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../pages/onboard/Callback */ "./src/pages/onboard/Callback.js");
+/* harmony import */ var _pages_onboard_SignIn__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../pages/onboard/SignIn */ "./src/pages/onboard/SignIn.js");
+/* harmony import */ var _pages_onboard_SignUp__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../pages/onboard/SignUp */ "./src/pages/onboard/SignUp.js");
+/* harmony import */ var _pages_onboard_ForgotPassword__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../pages/onboard/ForgotPassword */ "./src/pages/onboard/ForgotPassword.js");
+/* harmony import */ var _auth0_auth0_react__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @auth0/auth0-react */ "./node_modules/@auth0/auth0-react/dist/auth0-react.esm.js");
 var _jsxFileName = "C:\\xampp\\htdocs\\moucasa\\wp-content\\themes\\lms-portal\\react-src\\src\\components\\Layout.js";
-
 
 
 
@@ -539,28 +471,37 @@ var _jsxFileName = "C:\\xampp\\htdocs\\moucasa\\wp-content\\themes\\lms-portal\\
 
 const Layout = () => {
   const {
-    isAuthenticated
-  } = Object(_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_0__["useAuth0"])();
-  const [userLoggedin, setUserLoggedin] = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false);
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {
-    setUserLoggedin(isAuthenticated);
-  }, [isAuthenticated]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_2__["ThemeProvider"], {
-    theme: _Theme__WEBPACK_IMPORTED_MODULE_8__["default"],
+    isAuthenticated,
+    isLoading
+  } = Object(_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_12__["useAuth0"])();
+  console.log("isAuth ===== " + isAuthenticated);
+  console.log("isLoading ===== " + isLoading);
+  if (isLoading) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 21,
+        columnNumber: 12
+      }
+    }, "Loading...");
+  }
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["ThemeProvider"], {
+    theme: _Theme__WEBPACK_IMPORTED_MODULE_7__["default"],
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 25,
       columnNumber: 5
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_2__["CssBaseline"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["CssBaseline"], {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 26,
       columnNumber: 7
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["BrowserRouter"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], {
     basename: "/moucasa",
     __self: undefined,
     __source: {
@@ -568,37 +509,37 @@ const Layout = () => {
       lineNumber: 27,
       columnNumber: 7
     }
-  }, isAuthenticated && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Header__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, isAuthenticated && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Header__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 28,
       columnNumber: 29
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_2__["Container"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["Container"], {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 29,
       columnNumber: 9
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Routes"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Routes"], {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 30,
       columnNumber: 11
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/",
-    element: isAuthenticated ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Homepage__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    element: isAuthenticated ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Homepage__WEBPACK_IMPORTED_MODULE_5__["default"], {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
         lineNumber: 31,
         columnNumber: 56
       }
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_onboard_SignUp__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_onboard_SignUp__WEBPACK_IMPORTED_MODULE_10__["default"], {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
@@ -612,39 +553,16 @@ const Layout = () => {
       lineNumber: 31,
       columnNumber: 13
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
-    path: "/home",
-    element: isAuthenticated ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Homepage__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      __self: undefined,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 32,
-        columnNumber: 60
-      }
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_onboard_SignUp__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      __self: undefined,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 32,
-        columnNumber: 75
-      }
-    }),
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 32,
-      columnNumber: 13
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/contact",
-    element: isAuthenticated ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Contact__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    element: isAuthenticated ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Contact__WEBPACK_IMPORTED_MODULE_6__["default"], {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
         lineNumber: 33,
         columnNumber: 63
       }
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_onboard_SignUp__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_onboard_SignUp__WEBPACK_IMPORTED_MODULE_10__["default"], {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
@@ -658,9 +576,9 @@ const Layout = () => {
       lineNumber: 33,
       columnNumber: 13
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/callback",
-    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_onboard_Callback__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_onboard_Callback__WEBPACK_IMPORTED_MODULE_8__["default"], {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
@@ -674,9 +592,25 @@ const Layout = () => {
       lineNumber: 34,
       columnNumber: 13
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/signin",
-    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_onboard_SignIn__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_onboard_SignIn__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 35,
+        columnNumber: 44
+      }
+    }),
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 35,
+      columnNumber: 13
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+    path: "/signup",
+    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_onboard_SignUp__WEBPACK_IMPORTED_MODULE_10__["default"], {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
@@ -690,14 +624,14 @@ const Layout = () => {
       lineNumber: 36,
       columnNumber: 13
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
-    path: "/signup",
-    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_onboard_SignUp__WEBPACK_IMPORTED_MODULE_11__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+    path: "/forgot-password",
+    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_onboard_ForgotPassword__WEBPACK_IMPORTED_MODULE_11__["default"], {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
         lineNumber: 37,
-        columnNumber: 44
+        columnNumber: 53
       }
     }),
     __self: undefined,
@@ -706,14 +640,21 @@ const Layout = () => {
       lineNumber: 37,
       columnNumber: 13
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
-    path: "/forgot-password",
-    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_onboard_ForgotPassword__WEBPACK_IMPORTED_MODULE_12__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+    path: "*",
+    element: isAuthenticated ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Homepage__WEBPACK_IMPORTED_MODULE_5__["default"], {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
         lineNumber: 38,
-        columnNumber: 53
+        columnNumber: 56
+      }
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_onboard_SignUp__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 38,
+        columnNumber: 71
       }
     }),
     __self: undefined,
@@ -722,35 +663,12 @@ const Layout = () => {
       lineNumber: 38,
       columnNumber: 13
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
-    path: "*",
-    element: isAuthenticated ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_Homepage__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      __self: undefined,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 39,
-        columnNumber: 56
-      }
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_pages_onboard_SignUp__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      __self: undefined,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 39,
-        columnNumber: 71
-      }
-    }),
+  }))), isAuthenticated && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Footer__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 39,
-      columnNumber: 13
-    }
-  }))), userLoggedin && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Footer__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 42,
-      columnNumber: 26
+      lineNumber: 41,
+      columnNumber: 29
     }
   })));
 };
@@ -897,8 +815,9 @@ const root = Object(react_dom_client__WEBPACK_IMPORTED_MODULE_1__["createRoot"])
 root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_2__["Auth0Provider"], {
   domain: _auth0_config__WEBPACK_IMPORTED_MODULE_4__["auth0Config"].domain,
   clientId: _auth0_config__WEBPACK_IMPORTED_MODULE_4__["auth0Config"].clientId,
-  redirectUri: window.location.origin + '/moucasa/callback',
+  redirectUri: _auth0_config__WEBPACK_IMPORTED_MODULE_4__["auth0Config"].redirectUri,
   cacheLocation: "localstorage",
+  debug: true,
   __self: undefined,
   __source: {
     fileName: _jsxFileName,
@@ -909,7 +828,7 @@ root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createEle
   __self: undefined,
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 18,
+    lineNumber: 19,
     columnNumber: 5
   }
 })));
@@ -975,16 +894,61 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/index.js");
 /* harmony import */ var _Posts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Posts */ "./src/pages/Posts.js");
+/* harmony import */ var _auth0_auth0_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @auth0/auth0-react */ "./node_modules/@auth0/auth0-react/dist/auth0-react.esm.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 var _jsxFileName = "C:\\xampp\\htdocs\\moucasa\\wp-content\\themes\\lms-portal\\react-src\\src\\pages\\Homepage.js";
 
 
 
+
+
 const Homepage = () => {
+  const {
+    isAuthenticated,
+    isLoading,
+    handleRedirectCallback,
+    error
+  } = Object(_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_3__["useAuth0"])();
+  const navigate = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["useNavigate"])();
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    const handleAuth = async () => {
+      if (isLoading) return; // Wait until loading is done
+
+      if (!isAuthenticated) {
+        if (window.location.search.includes('code=') || window.location.search.includes('error=')) {
+          // Handle the Auth0 callback
+          try {
+            await handleRedirectCallback();
+          } catch (err) {
+            console.error("Error during Auth0 callback:", err);
+            navigate('/signup');
+          }
+        } else {
+          // Redirect to Auth0 login if not authenticated
+          navigate('/signup');
+        }
+      } else {
+        // Redirect to the home page if already authenticated
+        navigate('/home');
+      }
+    };
+    handleAuth();
+  }, [isAuthenticated, isLoading, handleRedirectCallback, navigate]);
+  if (isLoading) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 38,
+        columnNumber: 12
+      }
+    }, "Loading...");
+  }
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 7,
+      lineNumber: 42,
       columnNumber: 5
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["Typography"], {
@@ -993,7 +957,7 @@ const Homepage = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 8,
+      lineNumber: 43,
       columnNumber: 7
     }
   }, "Home Page"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["Typography"], {
@@ -1001,21 +965,21 @@ const Homepage = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 11,
+      lineNumber: 46,
       columnNumber: 7
     }
   }, "Welcome to the home page!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 14,
+      lineNumber: 49,
       columnNumber: 7
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Posts__WEBPACK_IMPORTED_MODULE_2__["Posts"], {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 15,
+      lineNumber: 50,
       columnNumber: 9
     }
   })));
@@ -1126,33 +1090,77 @@ var _jsxFileName = "C:\\xampp\\htdocs\\moucasa\\wp-content\\themes\\lms-portal\\
 const Callback = () => {
   const {
     handleRedirectCallback,
-    isAuthenticated
+    isAuthenticated,
+    isLoading,
+    error
   } = Object(_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_1__["useAuth0"])();
   const navigate = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useNavigate"])();
+
+  // Function to handle redirection based on authentication status
+  const handleRedirection = () => {
+    if (isAuthenticated) {
+      console.log("Authenticated: Navigating to /");
+      navigate('/', {
+        replace: true
+      });
+    } else {
+      console.log("Not authenticated: Navigating to /signup");
+      navigate('/signup', {
+        replace: true
+      });
+    }
+  };
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    // Handle Auth0 redirect callback
     const handleAuthCallback = async () => {
       try {
         await handleRedirectCallback();
-        if (isAuthenticated) {
-          navigate('/home');
-        } else {
-          navigate('/signup');
-        }
-      } catch (error) {
-        console.error("Error during Auth0 callback:", error);
-        navigate('/signup');
+        console.log("Auth0 callback handled successfully");
+        handleRedirection(); // Call redirection after handling callback
+      } catch (err) {
+        console.error("Error during Auth0 callback:", err);
+        navigate('/signup', {
+          replace: true
+        });
       }
     };
     handleAuthCallback();
-  }, [handleRedirectCallback, isAuthenticated, navigate]);
+  }, [handleRedirectCallback, navigate]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    if (!isLoading && !isAuthenticated) {
+      console.log("Not authenticated: Navigating to /signup");
+      handleRedirection(); // Handle redirection based on current authentication status
+    }
+  }, [isAuthenticated, isLoading, handleRedirection]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 27,
-      columnNumber: 10
+      lineNumber: 44,
+      columnNumber: 5
     }
-  }, "Loading...");
+  }, isLoading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 46,
+      columnNumber: 9
+    }
+  }, "Loading...") : error ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 48,
+      columnNumber: 9
+    }
+  }, "Error during Auth0 callback: ", error.message) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 50,
+      columnNumber: 9
+    }
+  }, "Redirecting..."));
 };
 /* harmony default export */ __webpack_exports__["default"] = (Callback);
 
@@ -1478,7 +1486,6 @@ var _jsxFileName = "C:\\xampp\\htdocs\\moucasa\\wp-content\\themes\\lms-portal\\
 
 
 
- // Import useNavigate
 
 function Copyright(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_mui_material_Typography__WEBPACK_IMPORTED_MODULE_11__["default"], Object.assign({
@@ -1494,7 +1501,7 @@ function Copyright(props) {
     }
   }), 'Copyright © ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_mui_material_Link__WEBPACK_IMPORTED_MODULE_7__["default"], {
     color: "inherit",
-    href: "https://mui.com/",
+    href: "https://127.0.0.1/moucasa",
     __self: this,
     __source: {
       fileName: _jsxFileName,
@@ -1505,28 +1512,40 @@ function Copyright(props) {
 }
 const defaultTheme = Object(_mui_material_styles__WEBPACK_IMPORTED_MODULE_13__["createTheme"])();
 const SignIn = () => {
-  const navigate = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_14__["useNavigate"])(); // Initialize useNavigate
-
-  const handleSubmit = event => {
+  const navigate = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_14__["useNavigate"])();
+  const [loading, setLoading] = react__WEBPACK_IMPORTED_MODULE_0__["useState"](false);
+  const [error, setError] = react__WEBPACK_IMPORTED_MODULE_0__["useState"]('');
+  const handleSubmit = async event => {
     event.preventDefault();
+    setLoading(true);
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get('email'),
       password: data.get('password')
     });
+    // Simulate API call
+    try {
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Navigate to dashboard or handle success
+      navigate('/dashboard');
+    } catch (error) {
+      setError('Sign-in failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
   const handleSignUpClick = () => {
-    navigate('/'); // Navigate to SignUp page
+    navigate('/signup');
   };
   const handleForgotPasswordClick = () => {
-    navigate('/forgot-password'); // Navigate to ForgotPassword page
+    navigate('/forgot-password');
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_mui_material_styles__WEBPACK_IMPORTED_MODULE_13__["ThemeProvider"], {
     theme: defaultTheme,
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53,
+      lineNumber: 66,
       columnNumber: 9
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_mui_material_Container__WEBPACK_IMPORTED_MODULE_12__["default"], {
@@ -1535,14 +1554,14 @@ const SignIn = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54,
+      lineNumber: 67,
       columnNumber: 13
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55,
+      lineNumber: 68,
       columnNumber: 17
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_mui_material_Box__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1555,7 +1574,7 @@ const SignIn = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56,
+      lineNumber: 69,
       columnNumber: 17
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_mui_material_Avatar__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -1566,14 +1585,14 @@ const SignIn = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 64,
+      lineNumber: 77,
       columnNumber: 21
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_mui_icons_material_LockOutlined__WEBPACK_IMPORTED_MODULE_10___default.a, {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 65,
+      lineNumber: 78,
       columnNumber: 25
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_mui_material_Typography__WEBPACK_IMPORTED_MODULE_11__["default"], {
@@ -1582,7 +1601,7 @@ const SignIn = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 67,
+      lineNumber: 80,
       columnNumber: 21
     }
   }, "Sign in"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_mui_material_Box__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1595,7 +1614,7 @@ const SignIn = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 70,
+      lineNumber: 83,
       columnNumber: 21
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_mui_material_TextField__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -1610,7 +1629,7 @@ const SignIn = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 71,
+      lineNumber: 84,
       columnNumber: 25
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_mui_material_TextField__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -1625,17 +1644,25 @@ const SignIn = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 81,
+      lineNumber: 94,
       columnNumber: 25
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_mui_material_FormControlLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }), error && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_mui_material_Typography__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    color: "error",
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 104,
+      columnNumber: 35
+    }
+  }, error), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_mui_material_FormControlLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
     control: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_mui_material_Checkbox__WEBPACK_IMPORTED_MODULE_6__["default"], {
       value: "remember",
       color: "primary",
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 92,
+        lineNumber: 106,
         columnNumber: 38
       }
     }),
@@ -1643,7 +1670,7 @@ const SignIn = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 91,
+      lineNumber: 105,
       columnNumber: 25
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_mui_material_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -1654,18 +1681,19 @@ const SignIn = () => {
       mt: 3,
       mb: 2
     },
+    disabled: loading,
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 95,
+      lineNumber: 109,
       columnNumber: 25
     }
-  }, "Sign In"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, loading ? 'Signing In...' : 'Sign In'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
     container: true,
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 103,
+      lineNumber: 118,
       columnNumber: 25
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -1674,17 +1702,16 @@ const SignIn = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 104,
+      lineNumber: 119,
       columnNumber: 29
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_mui_material_Link__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    href: "#",
     variant: "body2",
     onClick: handleForgotPasswordClick,
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 105,
+      lineNumber: 120,
       columnNumber: 33
     }
   }, "Forgot password?")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -1692,17 +1719,16 @@ const SignIn = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 109,
+      lineNumber: 124,
       columnNumber: 29
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_mui_material_Link__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    href: "#",
     variant: "body2",
     onClick: handleSignUpClick,
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 110,
+      lineNumber: 125,
       columnNumber: 33
     }
   }, "Don't have an account? Sign Up"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](Copyright, {
@@ -1713,7 +1739,7 @@ const SignIn = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 117,
+      lineNumber: 132,
       columnNumber: 17
     }
   })));
@@ -1731,9 +1757,9 @@ const SignIn = () => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _auth0_auth0_react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @auth0/auth0-react */ "./node_modules/@auth0/auth0-react/dist/auth0-react.esm.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _auth0_auth0_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @auth0/auth0-react */ "./node_modules/@auth0/auth0-react/dist/auth0-react.esm.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* harmony import */ var _mui_material_Avatar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material/Avatar */ "./node_modules/@mui/material/Avatar/index.js");
 /* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/index.js");
@@ -1745,10 +1771,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mui_material_Typography__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/material/Typography */ "./node_modules/@mui/material/Typography/index.js");
 /* harmony import */ var _mui_material_Container__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @mui/material/Container */ "./node_modules/@mui/material/Container/index.js");
 /* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @mui/material/styles */ "./node_modules/@mui/material/styles/index.js");
-/* harmony import */ var _Constants__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../Constants */ "./src/Constants.js");
-/* harmony import */ var _commonfunctions_CreateUser__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../commonfunctions/CreateUser */ "./src/commonfunctions/CreateUser.js");
-/* harmony import */ var _mui_material_Snackbar__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @mui/material/Snackbar */ "./node_modules/@mui/material/Snackbar/index.js");
-/* harmony import */ var _mui_material_Alert__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @mui/material/Alert */ "./node_modules/@mui/material/Alert/index.js");
+/* harmony import */ var _mui_material_Snackbar__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @mui/material/Snackbar */ "./node_modules/@mui/material/Snackbar/index.js");
+/* harmony import */ var _mui_material_Alert__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @mui/material/Alert */ "./node_modules/@mui/material/Alert/index.js");
+/* harmony import */ var _Constants__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../Constants */ "./src/Constants.js");
+/* harmony import */ var _commonfunctions_CreateUser__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../commonfunctions/CreateUser */ "./src/commonfunctions/CreateUser.js");
 var _jsxFileName = "C:\\xampp\\htdocs\\moucasa\\wp-content\\themes\\lms-portal\\react-src\\src\\pages\\onboard\\SignUp.js";
 
 
@@ -1767,8 +1793,7 @@ var _jsxFileName = "C:\\xampp\\htdocs\\moucasa\\wp-content\\themes\\lms-portal\\
 
 
 
-
-const Copyright = props => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_10__["default"], Object.assign({
+const Copyright = props => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_10__["default"], Object.assign({
   variant: "body2",
   color: "text.secondary",
   align: "center"
@@ -1776,32 +1801,43 @@ const Copyright = props => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___defau
   __self: undefined,
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 21,
+    lineNumber: 20,
     columnNumber: 5
   }
-}), 'Copyright © ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_mui_material_Link__WEBPACK_IMPORTED_MODULE_7__["default"], {
+}), 'Copyright © ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Link__WEBPACK_IMPORTED_MODULE_7__["default"], {
   color: "inherit",
   href: "https://yourwebsite.com/",
   __self: undefined,
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 23,
+    lineNumber: 22,
     columnNumber: 9
   }
 }, "Moucasa LMS"), ' ', new Date().getFullYear(), '.');
 const SignUp = () => {
   const defaultTheme = Object(_mui_material_styles__WEBPACK_IMPORTED_MODULE_12__["createTheme"])();
-  const [logoURL, setLogoURL] = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])('');
-  const [snackbarOpen, setSnackbarOpen] = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false);
-  const [snackbarMessage, setSnackbarMessage] = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])('');
-  const [snackbarSeverity, setSnackbarSeverity] = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])('success');
+  const [logoURL, setLogoURL] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('');
+  const [snackbarOpen, setSnackbarOpen] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+  const [snackbarMessage, setSnackbarMessage] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('');
+  const [snackbarSeverity, setSnackbarSeverity] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('success');
   const {
     loginWithRedirect
-  } = Object(_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_0__["useAuth0"])();
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => {
+  } = Object(_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_1__["useAuth0"])();
+  const navigate = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useNavigate"])();
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     fetchSiteLogo();
   }, []);
-  const navigate = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useNavigate"])();
+  const fetchSiteLogo = () => {
+    const cachedLogoURL = localStorage.getItem('siteLogoURL');
+    if (cachedLogoURL) {
+      setLogoURL(cachedLogoURL);
+      return;
+    }
+    fetch(`${_Constants__WEBPACK_IMPORTED_MODULE_15__["SITE_URL"]}/wp-json/an/images/sitelogo`).then(response => response.json()).then(resdata => {
+      setLogoURL(resdata.data);
+      localStorage.setItem('siteLogoURL', resdata.data);
+    }).catch(error => console.error('Error fetching sitelogo:', error));
+  };
   const handleSubmit = async event => {
     event.preventDefault();
     const formData = {
@@ -1810,14 +1846,31 @@ const SignUp = () => {
       email: event.currentTarget.email.value,
       password: event.currentTarget.password.value
     };
+
+    // Basic validation
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      setSnackbarMessage('Please enter a valid email address.');
+      setSnackbarSeverity('error');
+      setSnackbarOpen(true);
+      return;
+    }
+    if (formData.password.length < 6) {
+      setSnackbarMessage('Password must be at least 6 characters long.');
+      setSnackbarSeverity('error');
+      setSnackbarOpen(true);
+      return;
+    }
     try {
-      const response = await Object(_commonfunctions_CreateUser__WEBPACK_IMPORTED_MODULE_14__["default"])(formData);
+      const response = await Object(_commonfunctions_CreateUser__WEBPACK_IMPORTED_MODULE_16__["default"])(formData);
       console.log('User creation response:', response);
       if (response.message) {
-        setSnackbarMessage('You have registered successfully! Please sign in.');
+        setSnackbarMessage('You have registered successfully! Redirecting to sign in...');
         setSnackbarSeverity('success');
         setSnackbarOpen(true);
-        // setTimeout(() => navigate('/signin'), 3000);
+        setTimeout(() => {
+          setSnackbarOpen(false);
+          navigate('/signin');
+        }, 3000);
       }
     } catch (error) {
       setSnackbarMessage('Error creating user.');
@@ -1826,37 +1879,34 @@ const SignUp = () => {
       console.error('Error creating user:', error);
     }
   };
-  const fetchSiteLogo = () => {
-    fetch(`${_Constants__WEBPACK_IMPORTED_MODULE_13__["SITE_URL"]}/wp-json/an/images/sitelogo`).then(response => response.json()).then(resdata => setLogoURL(resdata.data)).catch(error => console.error('Error fetching sitelogo:', error));
-  };
   const handleCloseSnackbar = () => {
     setSnackbarOpen(false);
   };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_mui_material_styles__WEBPACK_IMPORTED_MODULE_12__["ThemeProvider"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_styles__WEBPACK_IMPORTED_MODULE_12__["ThemeProvider"], {
     theme: defaultTheme,
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 84,
+      lineNumber: 109,
       columnNumber: 9
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_mui_material_Container__WEBPACK_IMPORTED_MODULE_11__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Container__WEBPACK_IMPORTED_MODULE_11__["default"], {
     component: "main",
     maxWidth: "xs",
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 85,
+      lineNumber: 110,
       columnNumber: 13
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_5__["default"], {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 86,
+      lineNumber: 111,
       columnNumber: 17
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_mui_material_Box__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Box__WEBPACK_IMPORTED_MODULE_9__["default"], {
     sx: {
       marginTop: 8,
       display: 'flex',
@@ -1866,10 +1916,10 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 87,
+      lineNumber: 112,
       columnNumber: 17
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_mui_material_Avatar__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Avatar__WEBPACK_IMPORTED_MODULE_3__["default"], {
     sx: {
       m: 1,
       bgcolor: 'rgba(0, 0, 0, 0)'
@@ -1877,10 +1927,10 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 95,
+      lineNumber: 120,
       columnNumber: 21
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     src: logoURL,
     alt: "Logo",
     style: {
@@ -1890,19 +1940,19 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 96,
+      lineNumber: 121,
       columnNumber: 25
     }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_10__["default"], {
     component: "h1",
     variant: "h5",
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 98,
+      lineNumber: 123,
       columnNumber: 21
     }
-  }, "Register your Company"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_mui_material_Box__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }, "Register your Company"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Box__WEBPACK_IMPORTED_MODULE_9__["default"], {
     component: "form",
     noValidate: true,
     onSubmit: handleSubmit,
@@ -1912,29 +1962,29 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 99,
+      lineNumber: 124,
       columnNumber: 21
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
     container: true,
     spacing: 2,
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 100,
+      lineNumber: 125,
       columnNumber: 25
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
     item: true,
     xs: 12,
     sm: 6,
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 101,
+      lineNumber: 126,
       columnNumber: 29
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
     autoComplete: "given-name",
     name: "firstName",
     required: true,
@@ -1945,20 +1995,20 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 102,
+      lineNumber: 127,
       columnNumber: 33
     }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
     item: true,
     xs: 12,
     sm: 6,
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 112,
+      lineNumber: 137,
       columnNumber: 29
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
     required: true,
     fullWidth: true,
     id: "lastName",
@@ -1968,19 +2018,19 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 113,
+      lineNumber: 138,
       columnNumber: 33
     }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
     item: true,
     xs: 12,
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 122,
+      lineNumber: 147,
       columnNumber: 29
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
     required: true,
     fullWidth: true,
     id: "email",
@@ -1990,19 +2040,19 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 123,
+      lineNumber: 148,
       columnNumber: 33
     }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
     item: true,
     xs: 12,
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 132,
+      lineNumber: 157,
       columnNumber: 29
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
     required: true,
     fullWidth: true,
     name: "password",
@@ -2013,10 +2063,10 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 133,
+      lineNumber: 158,
       columnNumber: 33
     }
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_mui_material_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
     type: "submit",
     fullWidth: true,
     variant: "contained",
@@ -2027,47 +2077,46 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 144,
+      lineNumber: 169,
       columnNumber: 25
     }
-  }, "Sign Up"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, "Sign Up"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
     container: true,
     justifyContent: "flex-end",
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 152,
+      lineNumber: 177,
       columnNumber: 25
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
     item: true,
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 153,
+      lineNumber: 178,
       columnNumber: 29
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_mui_material_Link__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    href: "#",
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Link__WEBPACK_IMPORTED_MODULE_7__["default"], {
     variant: "body2",
     onClick: () => loginWithRedirect(),
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 154,
+      lineNumber: 179,
       columnNumber: 33
     }
-  }, "Already have an account? Sign in"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Copyright, {
+  }, "Already have an account? Sign in"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Copyright, {
     sx: {
       mt: 5
     },
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 161,
+      lineNumber: 186,
       columnNumber: 17
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_mui_material_Snackbar__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Snackbar__WEBPACK_IMPORTED_MODULE_13__["default"], {
     open: snackbarOpen,
     autoHideDuration: 6000,
     onClose: handleCloseSnackbar,
@@ -2078,10 +2127,10 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 162,
+      lineNumber: 187,
       columnNumber: 17
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_16__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_14__["default"], {
     onClose: handleCloseSnackbar,
     severity: snackbarSeverity,
     sx: {
@@ -2090,7 +2139,7 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 168,
+      lineNumber: 193,
       columnNumber: 21
     }
   }, snackbarMessage))));

@@ -12,13 +12,13 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
             {'Copyright © '}
-            <Link color="inherit" href="https://mui.com/">
+            <Link color="inherit" href="https://127.0.0.1/moucasa">
                 Moucasa LMS
             </Link>{' '}
             {new Date().getFullYear()}
@@ -30,23 +30,36 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 const SignIn = () => {
-    const navigate = useNavigate(); // Initialize useNavigate
+    const navigate = useNavigate();
+    const [loading, setLoading] = React.useState(false);
+    const [error, setError] = React.useState('');
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
+        setLoading(true);
         const data = new FormData(event.currentTarget);
         console.log({
             email: data.get('email'),
             password: data.get('password'),
         });
+        // Simulate API call
+        try {
+            await new Promise((resolve) => setTimeout(resolve, 2000));
+            // Navigate to dashboard or handle success
+            navigate('/dashboard');
+        } catch (error) {
+            setError('Sign-in failed. Please try again.');
+        } finally {
+            setLoading(false);
+        }
     };
 
     const handleSignUpClick = () => {
-        navigate('/'); // Navigate to SignUp page
+        navigate('/signup');
     };
 
     const handleForgotPasswordClick = () => {
-        navigate('/forgot-password'); // Navigate to ForgotPassword page
+        navigate('/forgot-password');
     };
 
     return (
@@ -88,6 +101,7 @@ const SignIn = () => {
                             id="password"
                             autoComplete="current-password"
                         />
+                        {error && <Typography color="error">{error}</Typography>}
                         <FormControlLabel
                             control={<Checkbox value="remember" color="primary" />}
                             label="Remember me"
@@ -97,17 +111,18 @@ const SignIn = () => {
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
+                            disabled={loading}
                         >
-                            Sign In
+                            {loading ? 'Signing In...' : 'Sign In'}
                         </Button>
                         <Grid container>
                             <Grid item xs>
-                                <Link href="#" variant="body2" onClick={handleForgotPasswordClick}>
+                                <Link variant="body2" onClick={handleForgotPasswordClick}>
                                     Forgot password?
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link href="#" variant="body2" onClick={handleSignUpClick}>
+                                <Link variant="body2" onClick={handleSignUpClick}>
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>
@@ -118,6 +133,6 @@ const SignIn = () => {
             </Container>
         </ThemeProvider>
     );
-}
+};
 
 export default SignIn;

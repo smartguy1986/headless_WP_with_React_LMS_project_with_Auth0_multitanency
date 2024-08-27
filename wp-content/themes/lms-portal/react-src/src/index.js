@@ -11,8 +11,9 @@ root.render(
   <Auth0Provider
     domain={auth0Config.domain}
     clientId={auth0Config.clientId}
-    redirectUri={window.location.origin + '/moucasa/callback'}
+    redirectUri={auth0Config.redirectUri}
     cacheLocation="localstorage"
+    debug={true}
   >
   
     <App />
