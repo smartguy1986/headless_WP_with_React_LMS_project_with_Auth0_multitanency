@@ -132,7 +132,7 @@ if (!class_exists('anCustomAuth0API')) {
                 'client_id' => $this->config['AUTH_CLINET_ID'],
                 'client_secret' => $this->config['AUTH_CLIENT_SECRET'],
                 'audience' => 'https://' . $this->config['AUTH_DOMAIN'] . '/api/v2/',
-                'grant_type' => 'client_credentials'
+                'grant_type' => 'authorization_code'
             );
 
             // Auth0 token URL

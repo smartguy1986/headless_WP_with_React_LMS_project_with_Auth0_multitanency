@@ -1,7 +1,7 @@
 <?php
 function allow_my_custom_origins($headers)
 {
-    $headers['Access-Control-Allow-Origin'] = 'http://127.0.0.1'; // Change this to your React app domain
+    $headers['Access-Control-Allow-Origin'] = 'https://127.0.0.1'; // Change this to your React app domain
     $headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, PATCH, DELETE';
     $headers['Access-Control-Allow-Credentials'] = 'true';
     return $headers;

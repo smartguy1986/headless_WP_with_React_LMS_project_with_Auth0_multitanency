@@ -1,5 +1,5 @@
+import React, { useState, useEffect } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -11,11 +11,10 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useState, useEffect } from 'react';
-import { SITE_URL } from '../../Constants';
-import createUser from '../../commonfunctions/CreateUser';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import { SITE_URL } from '../../Constants';
+import createUser from '../../commonfunctions/CreateUser';
 
 const Copyright = (props) => (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -36,12 +35,27 @@ const SignUp = () => {
     const [snackbarSeverity, setSnackbarSeverity] = useState('success');
 
     const { loginWithRedirect } = useAuth0();
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchSiteLogo();
     }, []);
 
-    const navigate = useNavigate();
+    const fetchSiteLogo = () => {
+        const cachedLogoURL = localStorage.getItem('siteLogoURL');
+        if (cachedLogoURL) {
+            setLogoURL(cachedLogoURL);
+            return;
+        }
+
+        fetch(`${SITE_URL}/wp-json/an/images/sitelogo`)
+            .then(response => response.json())
+            .then(resdata => {
+                setLogoURL(resdata.data);
+                localStorage.setItem('siteLogoURL', resdata.data);
+            })
+            .catch(error => console.error('Error fetching sitelogo:', error));
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -52,14 +66,32 @@ const SignUp = () => {
             password: event.currentTarget.password.value,
         };
 
+        // Basic validation
+        if (!/\S+@\S+\.\S+/.test(formData.email)) {
+            setSnackbarMessage('Please enter a valid email address.');
+            setSnackbarSeverity('error');
+            setSnackbarOpen(true);
+            return;
+        }
+
+        if (formData.password.length < 6) {
+            setSnackbarMessage('Password must be at least 6 characters long.');
+            setSnackbarSeverity('error');
+            setSnackbarOpen(true);
+            return;
+        }
+
         try {
             const response = await createUser(formData);
             console.log('User creation response:', response);
             if (response.message) {
-                setSnackbarMessage('You have registered successfully! Please sign in.');
+                setSnackbarMessage('You have registered successfully! Redirecting to sign in...');
                 setSnackbarSeverity('success');
                 setSnackbarOpen(true);
-                // setTimeout(() => navigate('/signin'), 3000);
+                setTimeout(() => {
+                    setSnackbarOpen(false);
+                    navigate('/signin');
+                }, 3000);
             }
         } catch (error) {
             setSnackbarMessage('Error creating user.');
@@ -67,13 +99,6 @@ const SignUp = () => {
             setSnackbarOpen(true);
             console.error('Error creating user:', error);
         }
-    };
-
-    const fetchSiteLogo = () => {
-        fetch(`${SITE_URL}/wp-json/an/images/sitelogo`)
-            .then(response => response.json())
-            .then(resdata => setLogoURL(resdata.data))
-            .catch(error => console.error('Error fetching sitelogo:', error));
     };
 
     const handleCloseSnackbar = () => {
@@ -151,7 +176,7 @@ const SignUp = () => {
                         </Button>
                         <Grid container justifyContent="flex-end">
                             <Grid item>
-                                <Link href="#" variant="body2" onClick={() => loginWithRedirect()}>
+                                <Link variant="body2" onClick={() => loginWithRedirect()}>
                                     Already have an account? Sign in
                                 </Link>
                             </Grid>
