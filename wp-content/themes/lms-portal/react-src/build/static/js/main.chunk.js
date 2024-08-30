@@ -2048,7 +2048,7 @@ const SignUp = () => {
         setSnackbarOpen(true);
         setTimeout(() => {
           setSnackbarOpen(false);
-          navigate('/signin');
+          // navigate('/signin');
         }, 3000);
       }
     } catch (error) {
