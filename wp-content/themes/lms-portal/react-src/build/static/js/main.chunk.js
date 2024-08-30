@@ -78,17 +78,29 @@ __webpack_require__.r(__webpack_exports__);
 
 const theme = Object(_mui_material_styles__WEBPACK_IMPORTED_MODULE_0__["createTheme"])({
   palette: {
+    // primary: {
+    //   main: '#90323D',
+    // },
+    // secondary: {
+    //   main: '#A9CBB7',
+    // },
+    // background: {
+    //   default: '#EFECCA',
+    // },
+    // warning: {
+    //   main: '#303633',
+    // },
     primary: {
-      main: '#90323D'
+      main: '#fffff7 '
     },
     secondary: {
-      main: '#A9CBB7'
+      main: '#fffff7'
     },
     background: {
-      default: '#EFECCA'
+      default: '#fffff7'
     },
     warning: {
-      main: '#303633'
+      main: '#fffff7'
     }
   }
 });
@@ -96,20 +108,74 @@ const theme = Object(_mui_material_styles__WEBPACK_IMPORTED_MODULE_0__["createTh
 
 /***/ }),
 
-/***/ "./src/auth0-config.js":
-/*!*****************************!*\
-  !*** ./src/auth0-config.js ***!
-  \*****************************/
-/*! exports provided: auth0Config */
+/***/ "./src/auth/auth0-provider-with-history.js":
+/*!*************************************************!*\
+  !*** ./src/auth/auth0-provider-with-history.js ***!
+  \*************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "auth0Config", function() { return auth0Config; });
-const auth0Config = {
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var _auth0_auth0_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @auth0/auth0-react */ "./node_modules/@auth0/auth0-react/dist/auth0-react.esm.js");
+/* harmony import */ var _auth0_config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../auth0-config */ "./src/auth0-config.js");
+var _jsxFileName = "C:\\xampp\\htdocs\\moucasa\\wp-content\\themes\\lms-portal\\react-src\\src\\auth\\auth0-provider-with-history.js";
+
+
+
+
+const Auth0ProviderWithHistory = ({
+  children
+}) => {
+  const domain = _auth0_config__WEBPACK_IMPORTED_MODULE_3__["auth0ConfigforLogin"].domain;
+  const clientId = _auth0_config__WEBPACK_IMPORTED_MODULE_3__["auth0ConfigforLogin"].clientId;
+  const navigate = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useNavigate"])(); // Use useNavigate
+
+  const onRedirectCallback = appState => {
+    navigate((appState === null || appState === void 0 ? void 0 : appState.returnTo) || window.location.pathname);
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_2__["Auth0Provider"], {
+    domain: domain,
+    clientId: clientId,
+    redirectUri: _auth0_config__WEBPACK_IMPORTED_MODULE_3__["auth0ConfigforLogin"].redirectUri,
+    onRedirectCallback: onRedirectCallback,
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 17,
+      columnNumber: 9
+    }
+  }, children);
+};
+/* harmony default export */ __webpack_exports__["default"] = (Auth0ProviderWithHistory);
+
+/***/ }),
+
+/***/ "./src/auth0-config.js":
+/*!*****************************!*\
+  !*** ./src/auth0-config.js ***!
+  \*****************************/
+/*! exports provided: auth0ConfigforLogin, auth0ConfigforSignUp */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "auth0ConfigforLogin", function() { return auth0ConfigforLogin; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "auth0ConfigforSignUp", function() { return auth0ConfigforSignUp; });
+const auth0ConfigforLogin = {
   domain: "dev-r68c567whjkd1mbi.us.auth0.com",
   clientId: "SJrbL8AVe6NJgY9C8pCl1dfddeJwGBqu",
   clientSecret: "tVQJsAp41BUU4AAmF3biphURBc9xnjXjErCWEINmnHrPTr9FBA6gFtMZltsUwb-x",
+  redirectUri: "https://127.0.0.1/moucasa/home",
+  cacheLocation: "localstorage"
+};
+const auth0ConfigforSignUp = {
+  domain: "dev-r68c567whjkd1mbi.us.auth0.com",
+  clientId: "ccx75StLbKg8Og8SzEvsvjM1h4WCtetG",
+  clientSecret: "2D2jdddCCSKFFSbyemJAOKlnW33D7H81VtGkqeSBnoswp0SngkETNNFNuHc7LiEI",
   redirectUri: "https://127.0.0.1/moucasa",
   cacheLocation: "localstorage"
 };
@@ -252,14 +318,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _auth0_auth0_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @auth0/auth0-react */ "./node_modules/@auth0/auth0-react/dist/auth0-react.esm.js");
 /* harmony import */ var _mui_material_AppBar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/material/AppBar */ "./node_modules/@mui/material/AppBar/index.js");
-/* harmony import */ var _mui_material_Toolbar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material/Toolbar */ "./node_modules/@mui/material/Toolbar/index.js");
-/* harmony import */ var _mui_material_Typography__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material/Typography */ "./node_modules/@mui/material/Typography/index.js");
-/* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/index.js");
-/* harmony import */ var _mui_material_IconButton__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/IconButton */ "./node_modules/@mui/material/IconButton/index.js");
-/* harmony import */ var _mui_icons_material_Menu__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/icons-material/Menu */ "./node_modules/@mui/icons-material/Menu.js");
-/* harmony import */ var _mui_icons_material_Menu__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_mui_icons_material_Menu__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
-/* harmony import */ var _Constants__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../Constants */ "./src/Constants.js");
+/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/index.js");
+/* harmony import */ var _mui_material_Toolbar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material/Toolbar */ "./node_modules/@mui/material/Toolbar/index.js");
+/* harmony import */ var _mui_material_IconButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/IconButton */ "./node_modules/@mui/material/IconButton/index.js");
+/* harmony import */ var _mui_material_Typography__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/Typography */ "./node_modules/@mui/material/Typography/index.js");
+/* harmony import */ var _mui_material_Container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/Container */ "./node_modules/@mui/material/Container/index.js");
+/* harmony import */ var _mui_material_Avatar__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/Avatar */ "./node_modules/@mui/material/Avatar/index.js");
+/* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/index.js");
+/* harmony import */ var _mui_material_Tooltip__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/material/Tooltip */ "./node_modules/@mui/material/Tooltip/index.js");
+/* harmony import */ var _mui_material_MenuItem__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @mui/material/MenuItem */ "./node_modules/@mui/material/MenuItem/index.js");
+/* harmony import */ var _mui_material_Menu__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @mui/material/Menu */ "./node_modules/@mui/material/Menu/index.js");
+/* harmony import */ var _mui_material_Stack__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @mui/material/Stack */ "./node_modules/@mui/material/Stack/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var _Constants__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../Constants */ "./src/Constants.js");
 var _jsxFileName = "C:\\xampp\\htdocs\\moucasa\\wp-content\\themes\\lms-portal\\react-src\\src\\components\\Header.js";
 
 
@@ -271,10 +342,15 @@ var _jsxFileName = "C:\\xampp\\htdocs\\moucasa\\wp-content\\themes\\lms-portal\\
 
 
 
-// import { LogoutButton } from './ActionButtons';
 
+
+
+
+
+
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const Header = () => {
-  const navigate = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_8__["useNavigate"])();
+  const navigate = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_14__["useNavigate"])();
   const {
     user,
     isAuthenticated,
@@ -283,6 +359,7 @@ const Header = () => {
     logout
   } = Object(_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_1__["useAuth0"])();
   const [logoURL, setLogoURL] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('');
+  const [anchorElUser, setAnchorElUser] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     fetchSiteLogo();
   }, []);
@@ -294,7 +371,7 @@ const Header = () => {
     }
   }, [isAuthenticated, user]);
   const fetchSiteLogo = () => {
-    fetch(`${_Constants__WEBPACK_IMPORTED_MODULE_9__["SITE_URL"]}/wp-json/an/images/sitelogo`).then(response => response.json()).then(resdata => {
+    fetch(`${_Constants__WEBPACK_IMPORTED_MODULE_15__["SITE_URL"]}/wp-json/an/images/sitelogo`).then(response => response.json()).then(resdata => {
       setLogoURL(resdata.data);
     }).catch(error => {
       console.error('Error fetching sitelogo:', error);
@@ -312,7 +389,7 @@ const Header = () => {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 49,
+        lineNumber: 57,
         columnNumber: 12
       }
     }, "Loading...");
@@ -322,111 +399,216 @@ const Header = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53,
+      lineNumber: 61,
       columnNumber: 5
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Toolbar__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Container__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    maxWidth: "xl",
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54,
+      lineNumber: 62,
       columnNumber: 7
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_IconButton__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    edge: "start",
-    color: "inherit",
-    "aria-label": "menu",
-    onClick: () => navigate('/'),
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Toolbar__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    disableGutters: true,
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55,
+      lineNumber: 63,
       columnNumber: 9
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_icons_material_Menu__WEBPACK_IMPORTED_MODULE_7___default.a, {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 56,
-      columnNumber: 11
-    }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: logoURL,
-    alt: "Logo",
-    style: {
-      marginLeft: 10,
-      marginRight: 10,
-      height: '40px'
-    },
-    onClick: () => navigate('/'),
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 58,
-      columnNumber: 9
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    variant: "h6",
-    style: {
-      flexGrow: 1
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Box__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    sx: {
+      display: {
+        md: 'flex'
+      },
+      mr: 1
     },
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 64,
-      columnNumber: 9
+      columnNumber: 11
     }
-  }, "My Website"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    color: "inherit",
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: logoURL,
+    alt: "Logo",
+    style: {
+      height: '40px',
+      cursor: 'pointer'
+    },
     onClick: () => navigate('/'),
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 67,
-      columnNumber: 9
+      lineNumber: 65,
+      columnNumber: 13
     }
-  }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    color: "inherit",
-    onClick: () => navigate('/contact'),
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    variant: "h6",
+    noWrap: true,
+    component: "div",
+    sx: {
+      flexGrow: 1,
+      display: {
+        md: 'flex'
+      },
+      fontFamily: 'monospace',
+      fontWeight: 700,
+      letterSpacing: '.3rem',
+      color: 'inherit',
+      textDecoration: 'none'
+    },
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 68,
-      columnNumber: 9
-    }
-  }, "Contact"), isAuthenticated || storedUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 70,
+      lineNumber: 73,
       columnNumber: 11
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+  }, "Moucasa LMS"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Box__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    sx: {
+      flexGrow: 1,
+      display: 'flex',
+      alignItems: 'left'
+    },
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 71,
+      lineNumber: 90,
+      columnNumber: 11
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Stack__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    direction: "row",
+    spacing: 2,
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 91,
       columnNumber: 13
     }
-  }, storedUser ? storedUser.email : user.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
     color: "inherit",
-    onClick: handleLogout,
+    onClick: () => navigate('/'),
+    variant: "outlined",
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 72,
-      columnNumber: 13
+      lineNumber: 92,
+      columnNumber: 15
     }
-  }, "Logout")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    color: "inherit",
+    onClick: () => navigate('/contact'),
+    variant: "outlined",
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 93,
+      columnNumber: 15
+    }
+  }, "Contact"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Box__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    sx: {
+      flexGrow: 0,
+      display: 'flex',
+      alignItems: 'center'
+    },
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 97,
+      columnNumber: 11
+    }
+  }, isAuthenticated || storedUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Tooltip__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    title: "Open settings",
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 100,
+      columnNumber: 17
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_IconButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    onClick: e => setAnchorElUser(e.currentTarget),
+    sx: {
+      p: 0
+    },
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 101,
+      columnNumber: 19
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Avatar__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    alt: storedUser ? storedUser.name : user.name,
+    src: storedUser ? storedUser.picture : user.picture,
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 102,
+      columnNumber: 21
+    }
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    variant: "body1",
+    color: "inherit",
+    sx: {
+      ml: 1
+    },
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 105,
+      columnNumber: 17
+    }
+  }, storedUser ? storedUser.email : user.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Menu__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    sx: {
+      mt: '45px'
+    },
+    id: "menu-appbar",
+    anchorEl: anchorElUser,
+    anchorOrigin: {
+      vertical: 'top',
+      horizontal: 'right'
+    },
+    keepMounted: true,
+    transformOrigin: {
+      vertical: 'top',
+      horizontal: 'right'
+    },
+    open: Boolean(anchorElUser),
+    onClose: () => setAnchorElUser(null),
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 108,
+      columnNumber: 17
+    }
+  }, settings.map(setting => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_MenuItem__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    key: setting,
+    onClick: setting === 'Logout' ? handleLogout : () => setAnchorElUser(null),
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 119,
+      columnNumber: 21
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    textAlign: "center",
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 120,
+      columnNumber: 23
+    }
+  }, setting))))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
     color: "inherit",
     onClick: () => loginWithRedirect(),
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 75,
-      columnNumber: 11
+      lineNumber: 126,
+      columnNumber: 15
     }
-  }, "Login")));
+  }, "Login")))));
 };
 /* harmony default export */ __webpack_exports__["default"] = (Header);
 
@@ -501,15 +683,7 @@ const Layout = () => {
       lineNumber: 26,
       columnNumber: 7
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], {
-    basename: "/moucasa",
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 27,
-      columnNumber: 7
-    }
-  }, isAuthenticated && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Header__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }), isAuthenticated && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Header__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
@@ -670,7 +844,7 @@ const Layout = () => {
       lineNumber: 41,
       columnNumber: 29
     }
-  })));
+  }));
 };
 /* harmony default export */ __webpack_exports__["default"] = (Layout);
 
@@ -801,37 +975,43 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
 /* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom_client__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _auth0_auth0_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @auth0/auth0-react */ "./node_modules/@auth0/auth0-react/dist/auth0-react.esm.js");
-/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./App */ "./src/App.js");
-/* harmony import */ var _auth0_config__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./auth0-config */ "./src/auth0-config.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./App */ "./src/App.js");
+/* harmony import */ var _auth_auth0_provider_with_history__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./auth/auth0-provider-with-history */ "./src/auth/auth0-provider-with-history.js");
 var _jsxFileName = "C:\\xampp\\htdocs\\moucasa\\wp-content\\themes\\lms-portal\\react-src\\src\\index.js";
 
 
 
 
 
+ // Update path as necessary
+
 const container = document.getElementById('root');
 const root = Object(react_dom_client__WEBPACK_IMPORTED_MODULE_1__["createRoot"])(container);
-root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_2__["Auth0Provider"], {
-  domain: _auth0_config__WEBPACK_IMPORTED_MODULE_4__["auth0Config"].domain,
-  clientId: _auth0_config__WEBPACK_IMPORTED_MODULE_4__["auth0Config"].clientId,
-  redirectUri: _auth0_config__WEBPACK_IMPORTED_MODULE_4__["auth0Config"].redirectUri,
-  cacheLocation: "localstorage",
-  debug: true,
+root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["BrowserRouter"], {
   __self: undefined,
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 11,
+    lineNumber: 12,
     columnNumber: 3
   }
-}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_App__WEBPACK_IMPORTED_MODULE_3__["default"], {
+}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_auth0_provider_with_history__WEBPACK_IMPORTED_MODULE_5__["default"], {
   __self: undefined,
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 19,
+    lineNumber: 13,
     columnNumber: 5
   }
-})));
+}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_App__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  __self: undefined,
+  __source: {
+    fileName: _jsxFileName,
+    lineNumber: 14,
+    columnNumber: 7
+  }
+}))));
 
 /***/ }),
 
@@ -906,8 +1086,7 @@ const Homepage = () => {
   const {
     isAuthenticated,
     isLoading,
-    handleRedirectCallback,
-    error
+    handleRedirectCallback
   } = Object(_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_3__["useAuth0"])();
   const navigate = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["useNavigate"])();
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
@@ -2160,5 +2339,5 @@ module.exports = __webpack_require__(/*! C:\xampp\htdocs\moucasa\wp-content\them
 
 /***/ })
 
-},[[0,"runtime-main",0]]]);
+},[[0,"runtime-main",1]]]);
 //# sourceMappingURL=main.chunk.js.map

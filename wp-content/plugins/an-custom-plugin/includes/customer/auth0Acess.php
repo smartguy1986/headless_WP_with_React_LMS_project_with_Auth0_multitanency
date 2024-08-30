@@ -74,7 +74,7 @@ class customAuth0_API_Controller extends WP_REST_Controller
             $myAPI = new anCustomAuth0API($this->config);
             return $myAPI->an_custom_auth0_create_user($request->get_json_params());
         }
-        wp_send_json(array('status' => -1, 'message' => 'No route was found matching this URL'), 404);
+        return new WP_REST_Response(array('status' => -1, 'message' => 'No route was found matching this URL'), 404);
     }
 
     public function an_custom_auth0_remove_user($request)
@@ -83,7 +83,7 @@ class customAuth0_API_Controller extends WP_REST_Controller
             $myAPI = new anCustomAuth0API($this->config);
             return $myAPI->an_custom_auth0_remove_user($request['userId']);
         }
-        wp_send_json(array('status' => -1, 'message' => 'No route was found matching this URL'), 404);
+        return new WP_REST_Response(array('status' => -1, 'message' => 'No route was found matching this URL'), 404);
     }
 
     public function check_permissions()
@@ -106,7 +106,7 @@ if (!class_exists('anCustomAuth0API')) {
             $this->config = $config;
         }
 
-        public function an_custom_auth0_token_generate()
+        public function an_custom_auth0_token_generate($cred = 'loginCreds')
         {
             // Check if Auth0 credentials are configured
             if (empty($this->config)) {
@@ -129,14 +129,14 @@ if (!class_exists('anCustomAuth0API')) {
 
             // Prepare the data for the token request
             $data = array(
-                'client_id' => $this->config['AUTH_CLINET_ID'],
-                'client_secret' => $this->config['AUTH_CLIENT_SECRET'],
-                'audience' => 'https://' . $this->config['AUTH_DOMAIN'] . '/api/v2/',
-                'grant_type' => 'authorization_code'
+                'client_id' => $this->config[$cred]['AUTH_CLIENT_ID'],
+                'client_secret' => $this->config[$cred]['AUTH_CLIENT_SECRET'],
+                'audience' => 'https://' . $this->config[$cred]['AUTH_DOMAIN'] . '/api/v2/',
+                'grant_type' => ($cred === 'signupCreds') ? 'client_credentials' : 'authorization_code'
             );
 
             // Auth0 token URL
-            $url = 'https://' . $this->config['AUTH_DOMAIN'] . '/oauth/token';
+            $url = 'https://' . $this->config[$cred]['AUTH_DOMAIN'] . '/oauth/token';
 
             // Make the request using the CustomCurlRequests class
             $response = CustomCurlRequests::makeRequest($url, 'POST', [], $data);
@@ -168,17 +168,17 @@ if (!class_exists('anCustomAuth0API')) {
         public function an_custom_auth0_create_user($post_data)
         {
             if (empty($this->config)) {
-                wp_send_json(
+                return new WP_REST_Response(
                     array('status' => -1, 'message' => 'Auth0 credentials not configured!'),
                     400
                 );
             }
 
-            $resp = $this->an_custom_auth0_token_generate();
+            $resp = $this->an_custom_auth0_token_generate('signupCreds');
             // Extract the data from the WP_REST_Response object
             $response_data = $resp->get_data();
             $accessToken = $response_data['access_token'];
-            
+            error_log("tooken_generated_" . date("dmY H:i:s") . "----" . $accessToken);
             $user_data = [
                 "email" => $post_data['email'],
                 "user_metadata" => [
@@ -198,14 +198,14 @@ if (!class_exists('anCustomAuth0API')) {
                 "verify_email" => false
             ];
 
-            $url = 'https://' . $this->config['AUTH_DOMAIN'] . '/api/v2/users';
-            
+            $url = 'https://' . $this->config['signupCreds']['AUTH_DOMAIN'] . '/api/v2/users';
+
             $response = CustomCurlRequests::makeRequest($url, 'POST', [], $user_data, $accessToken);
             // Log the response for debugging
 
 
             if (is_wp_error($response)) {
-                wp_send_json(
+                return new WP_REST_Response(
                     array('status' => -1, 'message' => $response->get_error_message()),
                     400
                 );
@@ -223,10 +223,10 @@ if (!class_exists('anCustomAuth0API')) {
                     $response['user_id'],
                     $response['user_metadata']['roles']
                 );
-                // wp_send_json(array('status' => 0, 'message' => $resp));
-                wp_send_json(array('status' => 0, 'message' => $resp), 200);
+                // return new WP_REST_Response(array('status' => 0, 'message' => $resp));
+                return new WP_REST_Response(array('status' => 0, 'message' => $resp), 200);
             } else {
-                wp_send_json(array('status' => -1, 'message' => 'Something went wrong!'), 400);
+                return new WP_REST_Response(array('status' => -1, 'message' => 'Something went wrong!'), 400);
             }
         }
 
@@ -234,43 +234,18 @@ if (!class_exists('anCustomAuth0API')) {
         public function an_custom_auth0_remove_user($userId)
         {
             if (empty($this->config)) {
-                wp_send_json(
+                return new WP_REST_Response(
                     array('status' => -1, 'message' => 'Auth0 credentials not configured!'),
                     400
                 );
             }
             $accessToken = $this->an_custom_auth0_token_generate();
 
-            $url = 'https://' . $this->config['AUTH_DOMAIN'] . '/api/v2/users/' . $userId;
+            $url = 'https://' . $this->config['signupCreds']['AUTH_DOMAIN'] . '/api/v2/users/' . $userId;
 
             $response = CustomCurlRequests::makeRequest($url, 'DELETE', [], null, $accessToken);
 
-            wp_send_json(array('status' => 0, 'message' => 'Success', 'data' => $response), 200);
+            return new WP_REST_Response(array('status' => 0, 'message' => 'Success', 'data' => $response), 200);
         }
     }
 }
-
-// function an_custom_auth0_token_generate()
-// {
-//     $config = require __DIR__ . './auth0Config.php';
-
-//     if (empty($config)) {
-//         wp_send_json(
-//             array('status' => -1, 'message' => 'Auth0 credentials not configured!'),
-//             400
-//         );
-//     }
-
-//     $data = array(
-//         'client_id' => $config['AUTH_CLINET_ID'],
-//         'client_secret' => $config['AUTH_CLIENT_SECRET'],
-//         'audience' => 'https://' . $config['AUTH_DOMAIN'] . '/api/v2/',
-//         'grant_type' => 'client_credentials'
-//     );
-
-//     $url = 'https://' . $config['AUTH_DOMAIN'] . '/oauth/token';
-
-//     $response = CustomCurlRequests::makeRequest($url, 'POST', [], $data);
-
-//     return $response;
-// }

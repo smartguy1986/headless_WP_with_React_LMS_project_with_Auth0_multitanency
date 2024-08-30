@@ -24,7 +24,7 @@ const Layout = () => {
   return (
     <ThemeProvider theme={Theme}>
       <CssBaseline />
-      <Router basename="/moucasa">
+      {/* <Router basename="/moucasa"> */}
         {isAuthenticated && <Header />}
         <Container>
           <Routes>
@@ -39,7 +39,7 @@ const Layout = () => {
           </Routes>
         </Container>
         {isAuthenticated && <Footer />}
-      </Router>
+      {/* </Router> */}
     </ThemeProvider>
   );
 };
