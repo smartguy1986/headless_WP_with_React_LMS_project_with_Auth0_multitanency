@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { auth0ConfigforLogin } from '../auth0-config';
 
@@ -7,7 +7,7 @@ const Auth0ProviderWithHistory = ({ children }) => {
     const domain = auth0ConfigforLogin.domain;
     const clientId = auth0ConfigforLogin.clientId;
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     // const onRedirectCallback = (appState) => {
     //     navigate(appState?.returnTo || window.location.origin + '/moucasa/home');

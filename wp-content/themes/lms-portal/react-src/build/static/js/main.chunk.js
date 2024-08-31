@@ -91,16 +91,16 @@ const theme = Object(_mui_material_styles__WEBPACK_IMPORTED_MODULE_0__["createTh
     //   main: '#303633',
     // },
     primary: {
-      main: '#fffff7 '
+      main: '#ffffff '
     },
     secondary: {
-      main: '#fffff7'
+      main: '#ffffff'
     },
     background: {
-      default: '#fffff7'
+      default: '#ffffff'
     },
     warning: {
-      main: '#fffff7'
+      main: '#ffffff'
     }
   }
 });
@@ -119,29 +119,29 @@ const theme = Object(_mui_material_styles__WEBPACK_IMPORTED_MODULE_0__["createTh
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
-/* harmony import */ var _auth0_auth0_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @auth0/auth0-react */ "./node_modules/@auth0/auth0-react/dist/auth0-react.esm.js");
-/* harmony import */ var _auth0_config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../auth0-config */ "./src/auth0-config.js");
+/* harmony import */ var _auth0_auth0_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @auth0/auth0-react */ "./node_modules/@auth0/auth0-react/dist/auth0-react.esm.js");
+/* harmony import */ var _auth0_config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../auth0-config */ "./src/auth0-config.js");
 var _jsxFileName = "C:\\xampp\\htdocs\\moucasa\\wp-content\\themes\\lms-portal\\react-src\\src\\auth\\auth0-provider-with-history.js";
 
-
+// import { useNavigate } from 'react-router-dom';
 
 
 const Auth0ProviderWithHistory = ({
   children
 }) => {
-  const domain = _auth0_config__WEBPACK_IMPORTED_MODULE_3__["auth0ConfigforLogin"].domain;
-  const clientId = _auth0_config__WEBPACK_IMPORTED_MODULE_3__["auth0ConfigforLogin"].clientId;
-  const navigate = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useNavigate"])();
+  const domain = _auth0_config__WEBPACK_IMPORTED_MODULE_2__["auth0ConfigforLogin"].domain;
+  const clientId = _auth0_config__WEBPACK_IMPORTED_MODULE_2__["auth0ConfigforLogin"].clientId;
+
+  // const navigate = useNavigate();
 
   // const onRedirectCallback = (appState) => {
   //     navigate(appState?.returnTo || window.location.origin + '/moucasa/home');
   // };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_2__["Auth0Provider"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_1__["Auth0Provider"], {
     domain: domain,
     clientId: clientId,
-    redirectUri: _auth0_config__WEBPACK_IMPORTED_MODULE_3__["auth0ConfigforLogin"].redirectUri
+    redirectUri: _auth0_config__WEBPACK_IMPORTED_MODULE_2__["auth0ConfigforLogin"].redirectUri
     // onRedirectCallback={onRedirectCallback}
     ,
     cacheLocation: "localstorage" // This will store tokens in localStorage
@@ -251,61 +251,89 @@ var _jsxFileName = "C:\\xampp\\htdocs\\moucasa\\wp-content\\themes\\lms-portal\\
 
 
 const Footer = () => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["Box"], {
-    position: "fixed",
-    bottom: 0,
-    width: "100%",
-    bgcolor: "#01204E",
-    color: "white",
-    textAlign: "center",
-    py: 3,
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["AppBar"], {
+    position: "static",
+    className: "footer",
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 7,
       columnNumber: 5
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    variant: "body1",
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["Container"], {
+    maxWidth: "xl",
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 16,
+      lineNumber: 8,
       columnNumber: 7
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["Toolbar"], {
+    disableGutters: true,
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 9,
+      columnNumber: 9
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["Box"], {
+    sx: {
+      flexGrow: 1,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between'
+    },
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 10,
+      columnNumber: 11
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
     container: true,
     spacing: 2,
+    alignItems: "center",
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 11,
+      columnNumber: 13
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
+    item: true,
+    xs: 6,
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 12,
+      columnNumber: 15
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["Typography"], {
+    variant: "body1",
+    color: "inherit",
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 13,
+      columnNumber: 17
+    }
+  }, "\xA9 2024 My Website. All rights reserved.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
+    item: true,
+    xs: 6,
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 17,
-      columnNumber: 9
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
-    xs: 6,
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 18,
-      columnNumber: 11
-    }
-  }, "\xA9 2024 My Website. All rights reserved."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
-    xs: 6,
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 19,
-      columnNumber: 11
+      columnNumber: 15
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inc_weather_info_Weatherinfo__WEBPACK_IMPORTED_MODULE_2__["default"], {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 19,
-      columnNumber: 24
+      lineNumber: 18,
+      columnNumber: 17
     }
-  })))));
+  })))))));
 };
 /* harmony default export */ __webpack_exports__["default"] = (Footer);
 
@@ -404,6 +432,7 @@ const Header = () => {
   }
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_AppBar__WEBPACK_IMPORTED_MODULE_2__["default"], {
     position: "static",
+    className: "header",
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
@@ -428,10 +457,8 @@ const Header = () => {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Box__WEBPACK_IMPORTED_MODULE_3__["default"], {
     sx: {
-      display: {
-        md: 'flex'
-      },
-      mr: 1
+      display: 'flex',
+      mr: 2
     },
     __self: undefined,
     __source: {
@@ -458,15 +485,13 @@ const Header = () => {
     noWrap: true,
     component: "div",
     sx: {
-      flexGrow: 1,
-      display: {
-        md: 'flex'
-      },
+      display: 'flex',
       fontFamily: 'monospace',
       fontWeight: 700,
       letterSpacing: '.3rem',
       color: 'inherit',
-      textDecoration: 'none'
+      textDecoration: 'none',
+      mr: 2
     },
     __self: undefined,
     __source: {
@@ -478,7 +503,8 @@ const Header = () => {
     sx: {
       flexGrow: 1,
       display: 'flex',
-      alignItems: 'left'
+      alignItems: 'center',
+      justifyContent: 'flex-start'
     },
     __self: undefined,
     __source: {
@@ -499,6 +525,7 @@ const Header = () => {
     color: "inherit",
     onClick: () => navigate('/'),
     variant: "outlined",
+    className: "primaryButton",
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
@@ -509,6 +536,7 @@ const Header = () => {
     color: "inherit",
     onClick: () => navigate('/contact'),
     variant: "outlined",
+    className: "primaryButton",
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
@@ -640,12 +668,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_Homepage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../pages/Homepage */ "./src/pages/Homepage.js");
 /* harmony import */ var _pages_Contact__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../pages/Contact */ "./src/pages/Contact.js");
 /* harmony import */ var _Theme__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Theme */ "./src/Theme.js");
-/* harmony import */ var _pages_onboard_Callback__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../pages/onboard/Callback */ "./src/pages/onboard/Callback.js");
-/* harmony import */ var _pages_onboard_SignIn__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../pages/onboard/SignIn */ "./src/pages/onboard/SignIn.js");
-/* harmony import */ var _pages_onboard_SignUp__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../pages/onboard/SignUp */ "./src/pages/onboard/SignUp.js");
-/* harmony import */ var _pages_onboard_ForgotPassword__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../pages/onboard/ForgotPassword */ "./src/pages/onboard/ForgotPassword.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
-/* harmony import */ var _Loading__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./Loading */ "./src/components/Loading.js");
+/* harmony import */ var _pages_onboard_SignIn__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../pages/onboard/SignIn */ "./src/pages/onboard/SignIn.js");
+/* harmony import */ var _pages_onboard_SignUp__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../pages/onboard/SignUp */ "./src/pages/onboard/SignUp.js");
+/* harmony import */ var _pages_onboard_ForgotPassword__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../pages/onboard/ForgotPassword */ "./src/pages/onboard/ForgotPassword.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var _Loading__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Loading */ "./src/components/Loading.js");
 var _jsxFileName = "C:\\xampp\\htdocs\\moucasa\\wp-content\\themes\\lms-portal\\react-src\\src\\components\\Layout.js";
 
 
@@ -655,7 +682,7 @@ var _jsxFileName = "C:\\xampp\\htdocs\\moucasa\\wp-content\\themes\\lms-portal\\
 
 
 
-
+// import Callback from '../pages/onboard/Callback';
 
 
 
@@ -676,7 +703,7 @@ const Layout = () => {
   }, [isAuthenticated]);
   console.log("isAuth ==== " + isAuthenticated);
   if (isLoading) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Loading__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Loading__WEBPACK_IMPORTED_MODULE_12__["default"], {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
@@ -693,14 +720,7 @@ const Layout = () => {
       lineNumber: 36,
       columnNumber: 5
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_2__["CssBaseline"], {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 37,
-      columnNumber: 7
-    }
-  }), isAuthenticated && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Header__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, isAuthenticated && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Header__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
@@ -708,34 +728,36 @@ const Layout = () => {
       columnNumber: 27
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_2__["Container"], {
+    className: "mainContainer",
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 39,
       columnNumber: 7
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_12__["Routes"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__["Routes"], {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 40,
       columnNumber: 9
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_12__["Route"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__["Route"], {
     path: "/",
-    element: isauth ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Homepage__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    element: isAuthenticated ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Homepage__WEBPACK_IMPORTED_MODULE_5__["default"], {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
         lineNumber: 41,
-        columnNumber: 45
+        columnNumber: 54
       }
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_onboard_SignUp__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__["Navigate"], {
+      to: "/signup",
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
         lineNumber: 41,
-        columnNumber: 60
+        columnNumber: 69
       }
     }),
     __self: undefined,
@@ -744,22 +766,22 @@ const Layout = () => {
       lineNumber: 41,
       columnNumber: 11
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_12__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__["Route"], {
     path: "/home",
-    element: isauth ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Homepage__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    element: isAuthenticated ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Homepage__WEBPACK_IMPORTED_MODULE_5__["default"], {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
         lineNumber: 42,
-        columnNumber: 49
+        columnNumber: 58
       }
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_12__["Navigate"], {
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__["Navigate"], {
       to: "/signup",
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
         lineNumber: 42,
-        columnNumber: 64
+        columnNumber: 73
       }
     }),
     __self: undefined,
@@ -768,7 +790,7 @@ const Layout = () => {
       lineNumber: 42,
       columnNumber: 11
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_12__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__["Route"], {
     path: "/contact",
     element: isAuthenticated ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Contact__WEBPACK_IMPORTED_MODULE_6__["default"], {
       __self: undefined,
@@ -777,7 +799,7 @@ const Layout = () => {
         lineNumber: 43,
         columnNumber: 61
       }
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_12__["Navigate"], {
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__["Navigate"], {
       to: "/signup",
       __self: undefined,
       __source: {
@@ -792,25 +814,9 @@ const Layout = () => {
       lineNumber: 43,
       columnNumber: 11
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_12__["Route"], {
-    path: "/callback",
-    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_onboard_Callback__WEBPACK_IMPORTED_MODULE_8__["default"], {
-      __self: undefined,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 44,
-        columnNumber: 44
-      }
-    }),
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 44,
-      columnNumber: 11
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_12__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__["Route"], {
     path: "/signin",
-    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_onboard_SignIn__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_onboard_SignIn__WEBPACK_IMPORTED_MODULE_8__["default"], {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
@@ -824,9 +830,9 @@ const Layout = () => {
       lineNumber: 45,
       columnNumber: 11
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_12__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__["Route"], {
     path: "/signup",
-    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_onboard_SignUp__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_onboard_SignUp__WEBPACK_IMPORTED_MODULE_9__["default"], {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
@@ -840,9 +846,9 @@ const Layout = () => {
       lineNumber: 46,
       columnNumber: 11
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_12__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__["Route"], {
     path: "/forgot-password",
-    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_onboard_ForgotPassword__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_onboard_ForgotPassword__WEBPACK_IMPORTED_MODULE_10__["default"], {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
@@ -856,7 +862,7 @@ const Layout = () => {
       lineNumber: 47,
       columnNumber: 11
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_12__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__["Route"], {
     path: "*",
     element: isAuthenticated ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Homepage__WEBPACK_IMPORTED_MODULE_5__["default"], {
       __self: undefined,
@@ -865,7 +871,7 @@ const Layout = () => {
         lineNumber: 48,
         columnNumber: 54
       }
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_12__["Navigate"], {
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__["Navigate"], {
       to: "/signup",
       __self: undefined,
       __source: {
@@ -1077,7 +1083,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./App */ "./src/App.js");
 /* harmony import */ var _auth_auth0_provider_with_history__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./auth/auth0-provider-with-history */ "./src/auth/auth0-provider-with-history.js");
+/* harmony import */ var _style_syle_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./style/syle.css */ "./src/style/syle.css");
+/* harmony import */ var _style_syle_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_style_syle_css__WEBPACK_IMPORTED_MODULE_5__);
 var _jsxFileName = "C:\\xampp\\htdocs\\moucasa\\wp-content\\themes\\lms-portal\\react-src\\src\\index.js";
+
 
 
 
@@ -1090,21 +1099,21 @@ root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createEle
   __self: undefined,
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 11,
+    lineNumber: 12,
     columnNumber: 3
   }
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_auth0_provider_with_history__WEBPACK_IMPORTED_MODULE_4__["default"], {
   __self: undefined,
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 12,
+    lineNumber: 13,
     columnNumber: 5
   }
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_App__WEBPACK_IMPORTED_MODULE_3__["default"], {
   __self: undefined,
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 13,
+    lineNumber: 14,
     columnNumber: 7
   }
 }))));
@@ -1182,8 +1191,7 @@ const Homepage = () => {
   const {
     isAuthenticated,
     isLoading,
-    handleRedirectCallback,
-    error
+    handleRedirectCallback
   } = Object(_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_3__["useAuth0"])();
   const navigate = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["useNavigate"])();
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
@@ -1221,42 +1229,26 @@ const Homepage = () => {
     }, "Loading...");
   }
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "container",
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 42,
       columnNumber: 5
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["Typography"], {
-    variant: "h4",
-    gutterBottom: true,
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43,
-      columnNumber: 7
-    }
-  }, "Home Page"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["Typography"], {
-    variant: "body1",
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 46,
-      columnNumber: 7
-    }
-  }, "Welcome to the home page!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 49,
-      columnNumber: 7
+      lineNumber: 44,
+      columnNumber: 9
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Posts__WEBPACK_IMPORTED_MODULE_2__["Posts"], {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50,
-      columnNumber: 9
+      lineNumber: 45,
+      columnNumber: 11
     }
   })));
 };
@@ -1278,7 +1270,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/index.js");
 /* harmony import */ var _Constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Constants */ "./src/Constants.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_3__);
 var _jsxFileName = "C:\\xampp\\htdocs\\moucasa\\wp-content\\themes\\lms-portal\\react-src\\src\\pages\\Posts.js";
+
 
 
 
@@ -1303,7 +1298,7 @@ const Posts = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 29,
+      lineNumber: 30,
       columnNumber: 9
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["Typography"], {
@@ -1312,133 +1307,95 @@ const Posts = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 30,
+      lineNumber: 31,
       columnNumber: 13
     }
-  }, "All Posts"), posts.map(post => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    key: post.ID,
+  }, "All Posts"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
+    container: true,
+    spacing: 3,
+    justifyContent: "center",
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 34,
-      columnNumber: 17
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["Typography"], {
-    variant: "h4",
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 35,
-      columnNumber: 21
-    }
-  }, post.post_title))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["Pagination"], {
-    count: Math.ceil(posts.length / postsPerPage),
-    page: currentPage,
-    onChange: handleChangePage,
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 41,
       columnNumber: 13
     }
-  }));
-};
-
-/***/ }),
-
-/***/ "./src/pages/onboard/Callback.js":
-/*!***************************************!*\
-  !*** ./src/pages/onboard/Callback.js ***!
-  \***************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _auth0_auth0_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @auth0/auth0-react */ "./node_modules/@auth0/auth0-react/dist/auth0-react.esm.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
-var _jsxFileName = "C:\\xampp\\htdocs\\moucasa\\wp-content\\themes\\lms-portal\\react-src\\src\\pages\\onboard\\Callback.js";
-
-
-
-const Callback = () => {
-  const {
-    handleRedirectCallback,
-    isAuthenticated,
-    isLoading,
-    error
-  } = Object(_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_1__["useAuth0"])();
-  const navigate = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useNavigate"])();
-
-  // Function to handle redirection based on authentication status
-  const handleRedirection = () => {
-    if (isAuthenticated) {
-      console.log("Authenticated: Navigating to /");
-      navigate('/', {
-        replace: true
-      });
-    } else {
-      console.log("Not authenticated: Navigating to /signup");
-      navigate('/signup', {
-        replace: true
-      });
-    }
-  };
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    // Handle Auth0 redirect callback
-    const handleAuthCallback = async () => {
-      try {
-        await handleRedirectCallback();
-        console.log("Auth0 callback handled successfully");
-        handleRedirection(); // Call redirection after handling callback
-      } catch (err) {
-        console.error("Error during Auth0 callback:", err);
-        navigate('/signup', {
-          replace: true
-        });
-      }
-    };
-    handleAuthCallback();
-  }, [handleRedirectCallback, navigate]);
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    if (!isLoading && !isAuthenticated) {
-      console.log("Not authenticated: Navigating to /signup");
-      handleRedirection(); // Handle redirection based on current authentication status
-    }
-  }, [isAuthenticated, isLoading, handleRedirection]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, posts.map(course => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
+    item: true,
+    xs: 12,
+    sm: 6,
+    md: 4,
+    key: course.ID,
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 44,
-      columnNumber: 5
+      lineNumber: 36,
+      columnNumber: 21
     }
-  }, isLoading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["Card"], {
+    variant: "outlined",
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 46,
-      columnNumber: 9
+      lineNumber: 37,
+      columnNumber: 25
     }
-  }, "Loading...") : error ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["CardContent"], {
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 38,
+      columnNumber: 29
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["Typography"], {
+    variant: "h6",
+    gutterBottom: true,
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 39,
+      columnNumber: 33
+    }
+  }, course.post_title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["Typography"], {
+    variant: "body2",
+    color: "textSecondary",
+    gutterBottom: true,
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 42,
+      columnNumber: 33
+    }
+  }, "Published on: ", moment__WEBPACK_IMPORTED_MODULE_3___default()(course.post_date).format('MMMM Do, YYYY')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["Typography"], {
+    variant: "body1",
+    component: "p",
+    gutterBottom: true,
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 45,
+      columnNumber: 33
+    }
+  }, course.post_excerpt || 'No excerpt available.'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["Box"], {
+    mt: 2,
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 48,
-      columnNumber: 9
+      columnNumber: 33
     }
-  }, "Error during Auth0 callback: ", error.message) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+    variant: "contained",
+    color: "primary",
+    href: course.guid,
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50,
-      columnNumber: 9
+      lineNumber: 49,
+      columnNumber: 37
     }
-  }, "Redirecting..."));
+  }, "See More"))))))));
 };
-/* harmony default export */ __webpack_exports__["default"] = (Callback);
 
 /***/ }),
 
@@ -2036,24 +1993,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _auth0_auth0_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @auth0/auth0-react */ "./node_modules/@auth0/auth0-react/dist/auth0-react.esm.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
-/* harmony import */ var _mui_material_Avatar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material/Avatar */ "./node_modules/@mui/material/Avatar/index.js");
-/* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/index.js");
-/* harmony import */ var _mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/CssBaseline */ "./node_modules/@mui/material/CssBaseline/index.js");
-/* harmony import */ var _mui_material_TextField__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/TextField */ "./node_modules/@mui/material/TextField/index.js");
-/* harmony import */ var _mui_material_Link__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/Link */ "./node_modules/@mui/material/Link/index.js");
-/* harmony import */ var _mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/Grid */ "./node_modules/@mui/material/Grid/index.js");
-/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/index.js");
-/* harmony import */ var _mui_material_Typography__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/material/Typography */ "./node_modules/@mui/material/Typography/index.js");
-/* harmony import */ var _mui_material_Container__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @mui/material/Container */ "./node_modules/@mui/material/Container/index.js");
-/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @mui/material/styles */ "./node_modules/@mui/material/styles/index.js");
-/* harmony import */ var _mui_material_Snackbar__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @mui/material/Snackbar */ "./node_modules/@mui/material/Snackbar/index.js");
-/* harmony import */ var _mui_material_Alert__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @mui/material/Alert */ "./node_modules/@mui/material/Alert/index.js");
-/* harmony import */ var _Constants__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../Constants */ "./src/Constants.js");
-/* harmony import */ var _commonfunctions_CreateUser__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../commonfunctions/CreateUser */ "./src/commonfunctions/CreateUser.js");
+/* harmony import */ var _mui_material_Avatar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/material/Avatar */ "./node_modules/@mui/material/Avatar/index.js");
+/* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/index.js");
+/* harmony import */ var _mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material/CssBaseline */ "./node_modules/@mui/material/CssBaseline/index.js");
+/* harmony import */ var _mui_material_TextField__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/TextField */ "./node_modules/@mui/material/TextField/index.js");
+/* harmony import */ var _mui_material_Link__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/Link */ "./node_modules/@mui/material/Link/index.js");
+/* harmony import */ var _mui_material_Grid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/Grid */ "./node_modules/@mui/material/Grid/index.js");
+/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/index.js");
+/* harmony import */ var _mui_material_Typography__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/material/Typography */ "./node_modules/@mui/material/Typography/index.js");
+/* harmony import */ var _mui_material_Container__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/material/Container */ "./node_modules/@mui/material/Container/index.js");
+/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @mui/material/styles */ "./node_modules/@mui/material/styles/index.js");
+/* harmony import */ var _mui_material_Snackbar__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @mui/material/Snackbar */ "./node_modules/@mui/material/Snackbar/index.js");
+/* harmony import */ var _mui_material_Alert__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @mui/material/Alert */ "./node_modules/@mui/material/Alert/index.js");
+/* harmony import */ var _Constants__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../Constants */ "./src/Constants.js");
+/* harmony import */ var _commonfunctions_CreateUser__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../commonfunctions/CreateUser */ "./src/commonfunctions/CreateUser.js");
 var _jsxFileName = "C:\\xampp\\htdocs\\moucasa\\wp-content\\themes\\lms-portal\\react-src\\src\\pages\\onboard\\SignUp.js";
 
 
+// import { useNavigate } from 'react-router-dom';
 
 
 
@@ -2068,8 +2025,7 @@ var _jsxFileName = "C:\\xampp\\htdocs\\moucasa\\wp-content\\themes\\lms-portal\\
 
 
 
-
-const Copyright = props => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_10__["default"], Object.assign({
+const Copyright = props => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_9__["default"], Object.assign({
   variant: "body2",
   color: "text.secondary",
   align: "center"
@@ -2080,7 +2036,7 @@ const Copyright = props => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___defau
     lineNumber: 20,
     columnNumber: 5
   }
-}), 'Copyright © ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Link__WEBPACK_IMPORTED_MODULE_7__["default"], {
+}), 'Copyright © ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Link__WEBPACK_IMPORTED_MODULE_6__["default"], {
   color: "inherit",
   href: "https://yourwebsite.com/",
   __self: undefined,
@@ -2091,7 +2047,7 @@ const Copyright = props => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___defau
   }
 }, "Moucasa LMS"), ' ', new Date().getFullYear(), '.');
 const SignUp = () => {
-  const defaultTheme = Object(_mui_material_styles__WEBPACK_IMPORTED_MODULE_12__["createTheme"])();
+  const defaultTheme = Object(_mui_material_styles__WEBPACK_IMPORTED_MODULE_11__["createTheme"])();
   const [logoURL, setLogoURL] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('');
   const [snackbarOpen, setSnackbarOpen] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
   const [snackbarMessage, setSnackbarMessage] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('');
@@ -2099,7 +2055,8 @@ const SignUp = () => {
   const {
     loginWithRedirect
   } = Object(_auth0_auth0_react__WEBPACK_IMPORTED_MODULE_1__["useAuth0"])();
-  const navigate = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useNavigate"])();
+  // const navigate = useNavigate();
+
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     fetchSiteLogo();
   }, []);
@@ -2109,7 +2066,7 @@ const SignUp = () => {
       setLogoURL(cachedLogoURL);
       return;
     }
-    fetch(`${_Constants__WEBPACK_IMPORTED_MODULE_15__["SITE_URL"]}/wp-json/an/images/sitelogo`).then(response => response.json()).then(resdata => {
+    fetch(`${_Constants__WEBPACK_IMPORTED_MODULE_14__["SITE_URL"]}/wp-json/an/images/sitelogo`).then(response => response.json()).then(resdata => {
       setLogoURL(resdata.data);
       localStorage.setItem('siteLogoURL', resdata.data);
     }).catch(error => console.error('Error fetching sitelogo:', error));
@@ -2137,7 +2094,7 @@ const SignUp = () => {
       return;
     }
     try {
-      const response = await Object(_commonfunctions_CreateUser__WEBPACK_IMPORTED_MODULE_16__["default"])(formData);
+      const response = await Object(_commonfunctions_CreateUser__WEBPACK_IMPORTED_MODULE_15__["default"])(formData);
       console.log('User creation response:', response);
       if (response.message) {
         setSnackbarMessage('You have registered successfully! Redirecting to sign in...');
@@ -2158,7 +2115,7 @@ const SignUp = () => {
   const handleCloseSnackbar = () => {
     setSnackbarOpen(false);
   };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_styles__WEBPACK_IMPORTED_MODULE_12__["ThemeProvider"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_styles__WEBPACK_IMPORTED_MODULE_11__["ThemeProvider"], {
     theme: defaultTheme,
     __self: undefined,
     __source: {
@@ -2166,23 +2123,24 @@ const SignUp = () => {
       lineNumber: 109,
       columnNumber: 9
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Container__WEBPACK_IMPORTED_MODULE_11__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Container__WEBPACK_IMPORTED_MODULE_10__["default"], {
     component: "main",
     maxWidth: "xs",
+    className: "containerSignup",
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 110,
       columnNumber: 13
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_CssBaseline__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 111,
       columnNumber: 17
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Box__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Box__WEBPACK_IMPORTED_MODULE_8__["default"], {
     sx: {
       marginTop: 8,
       display: 'flex',
@@ -2195,7 +2153,7 @@ const SignUp = () => {
       lineNumber: 112,
       columnNumber: 17
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Avatar__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Avatar__WEBPACK_IMPORTED_MODULE_2__["default"], {
     sx: {
       m: 1,
       bgcolor: 'rgba(0, 0, 0, 0)'
@@ -2219,7 +2177,7 @@ const SignUp = () => {
       lineNumber: 121,
       columnNumber: 25
     }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_9__["default"], {
     component: "h1",
     variant: "h5",
     __self: undefined,
@@ -2228,7 +2186,7 @@ const SignUp = () => {
       lineNumber: 123,
       columnNumber: 21
     }
-  }, "Register your Company"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Box__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }, "Register your Company"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Box__WEBPACK_IMPORTED_MODULE_8__["default"], {
     component: "form",
     noValidate: true,
     onSubmit: handleSubmit,
@@ -2241,7 +2199,7 @@ const SignUp = () => {
       lineNumber: 124,
       columnNumber: 21
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_7__["default"], {
     container: true,
     spacing: 2,
     __self: undefined,
@@ -2250,7 +2208,7 @@ const SignUp = () => {
       lineNumber: 125,
       columnNumber: 25
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_7__["default"], {
     item: true,
     xs: 12,
     sm: 6,
@@ -2260,7 +2218,7 @@ const SignUp = () => {
       lineNumber: 126,
       columnNumber: 29
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_5__["default"], {
     autoComplete: "given-name",
     name: "firstName",
     required: true,
@@ -2274,7 +2232,7 @@ const SignUp = () => {
       lineNumber: 127,
       columnNumber: 33
     }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_7__["default"], {
     item: true,
     xs: 12,
     sm: 6,
@@ -2284,7 +2242,7 @@ const SignUp = () => {
       lineNumber: 137,
       columnNumber: 29
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_5__["default"], {
     required: true,
     fullWidth: true,
     id: "lastName",
@@ -2297,7 +2255,7 @@ const SignUp = () => {
       lineNumber: 138,
       columnNumber: 33
     }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_7__["default"], {
     item: true,
     xs: 12,
     __self: undefined,
@@ -2306,7 +2264,7 @@ const SignUp = () => {
       lineNumber: 147,
       columnNumber: 29
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_5__["default"], {
     required: true,
     fullWidth: true,
     id: "email",
@@ -2319,7 +2277,7 @@ const SignUp = () => {
       lineNumber: 148,
       columnNumber: 33
     }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_7__["default"], {
     item: true,
     xs: 12,
     __self: undefined,
@@ -2328,7 +2286,7 @@ const SignUp = () => {
       lineNumber: 157,
       columnNumber: 29
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_5__["default"], {
     required: true,
     fullWidth: true,
     name: "password",
@@ -2342,7 +2300,7 @@ const SignUp = () => {
       lineNumber: 158,
       columnNumber: 33
     }
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
     type: "submit",
     fullWidth: true,
     variant: "contained",
@@ -2350,36 +2308,37 @@ const SignUp = () => {
       mt: 3,
       mb: 2
     },
+    className: "primaryButton",
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 169,
       columnNumber: 25
     }
-  }, "Sign Up"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, "Sign Up"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_7__["default"], {
     container: true,
     justifyContent: "flex-end",
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 177,
+      lineNumber: 178,
       columnNumber: 25
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_7__["default"], {
     item: true,
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 178,
+      lineNumber: 179,
       columnNumber: 29
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Link__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Link__WEBPACK_IMPORTED_MODULE_6__["default"], {
     variant: "body2",
     onClick: () => loginWithRedirect(),
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 179,
+      lineNumber: 180,
       columnNumber: 33
     }
   }, "Already have an account? Sign in"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Copyright, {
@@ -2389,10 +2348,10 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 186,
+      lineNumber: 187,
       columnNumber: 17
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Snackbar__WEBPACK_IMPORTED_MODULE_13__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Snackbar__WEBPACK_IMPORTED_MODULE_12__["default"], {
     open: snackbarOpen,
     autoHideDuration: 6000,
     onClose: handleCloseSnackbar,
@@ -2403,10 +2362,10 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 187,
+      lineNumber: 188,
       columnNumber: 17
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_14__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mui_material_Alert__WEBPACK_IMPORTED_MODULE_13__["default"], {
     onClose: handleCloseSnackbar,
     severity: snackbarSeverity,
     sx: {
@@ -2415,12 +2374,23 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 193,
+      lineNumber: 194,
       columnNumber: 21
     }
   }, snackbarMessage))));
 };
 /* harmony default export */ __webpack_exports__["default"] = (SignUp);
+
+/***/ }),
+
+/***/ "./src/style/syle.css":
+/*!****************************!*\
+  !*** ./src/style/syle.css ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 

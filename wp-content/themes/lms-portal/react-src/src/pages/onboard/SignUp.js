@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -35,7 +35,7 @@ const SignUp = () => {
     const [snackbarSeverity, setSnackbarSeverity] = useState('success');
 
     const { loginWithRedirect } = useAuth0();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     useEffect(() => {
         fetchSiteLogo();
@@ -107,7 +107,7 @@ const SignUp = () => {
 
     return (
         <ThemeProvider theme={defaultTheme}>
-            <Container component="main" maxWidth="xs">
+            <Container component="main" maxWidth="xs" className='containerSignup'>
                 <CssBaseline />
                 <Box
                     sx={{
@@ -171,6 +171,7 @@ const SignUp = () => {
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
+                            className='primaryButton'
                         >
                             Sign Up
                         </Button>

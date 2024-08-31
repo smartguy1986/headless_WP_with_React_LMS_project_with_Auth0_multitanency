@@ -6,7 +6,7 @@ import Footer from './Footer';
 import Homepage from '../pages/Homepage';
 import Contact from '../pages/Contact';
 import Theme from '../Theme';
-import Callback from '../pages/onboard/Callback';
+// import Callback from '../pages/onboard/Callback';
 import SignIn from '../pages/onboard/SignIn';
 import SignUp from '../pages/onboard/SignUp';
 import ForgotPassword from '../pages/onboard/ForgotPassword';
@@ -34,14 +34,14 @@ const Layout = () => {
 
   return (
     <ThemeProvider theme={Theme}>
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       {isAuthenticated && <Header />}
-      <Container>
+      <Container className='mainContainer'>
         <Routes>
-          <Route path="/" element={isauth ? <Homepage /> : <SignUp />} />
-          <Route path="/home" element={isauth ? <Homepage /> : <Navigate to="/signup" />} />
+          <Route path="/" element={isAuthenticated ? <Homepage /> : <Navigate to="/signup" />} />
+          <Route path="/home" element={isAuthenticated ? <Homepage /> : <Navigate to="/signup" />} />
           <Route path="/contact" element={isAuthenticated ? <Contact /> : <Navigate to="/signup" />} />
-          <Route path="/callback" element={<Callback />} />
+          {/* <Route path="/callback" element={<Callback />} /> */}
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
