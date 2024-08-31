@@ -22,6 +22,7 @@ export const Posts = () => {
         setCurrentPage(newPage);
     };
 
+    
     useEffect(() => {
         console.log(posts); // Log posts whenever it changes
     }, [posts]);
