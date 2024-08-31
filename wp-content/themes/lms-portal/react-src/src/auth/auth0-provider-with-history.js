@@ -6,19 +6,21 @@ import { auth0ConfigforLogin } from '../auth0-config';
 const Auth0ProviderWithHistory = ({ children }) => {
     const domain = auth0ConfigforLogin.domain;
     const clientId = auth0ConfigforLogin.clientId;
-    
-    const navigate = useNavigate(); // Use useNavigate
 
-    const onRedirectCallback = (appState) => {
-        navigate(appState?.returnTo || window.location.pathname);
-    };
+    const navigate = useNavigate();
+
+    // const onRedirectCallback = (appState) => {
+    //     navigate(appState?.returnTo || window.location.origin + '/moucasa/home');
+    // };
 
     return (
         <Auth0Provider
             domain={domain}
             clientId={clientId}
             redirectUri={auth0ConfigforLogin.redirectUri}
-            onRedirectCallback={onRedirectCallback}
+            // onRedirectCallback={onRedirectCallback}
+            cacheLocation="localstorage" // This will store tokens in localStorage
+            useRefreshTokens={true} // Optional: Use refresh tokens to keep the session alive
         >
             {children}
         </Auth0Provider>

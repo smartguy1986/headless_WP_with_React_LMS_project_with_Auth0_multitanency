@@ -71,7 +71,7 @@ if (!class_exists('anCustomPostsAPI')) {
 
         public function an_custom_posts_get_by_type($postType)
         {
-            $posts_per_page = 1;
+            $posts_per_page = 10;
             $offset = 0;
             if (isset($_GET['page']) && $_GET['page']) :
                 $offset = ($_GET['page'] - 1) * $posts_per_page;

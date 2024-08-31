@@ -14,6 +14,7 @@ import Menu from '@mui/material/Menu';
 import Stack from '@mui/material/Stack';
 import { useNavigate } from 'react-router-dom';
 import { SITE_URL } from '../Constants';
+import Loading from './Loading';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -54,7 +55,7 @@ const Header = () => {
   const storedUser = JSON.parse(localStorage.getItem('user'));
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (

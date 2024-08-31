@@ -5,7 +5,7 @@ import { SITE_URL } from '../Constants';
 export const Posts = () => {
     const [posts, setPosts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const postsPerPage = 1; // Adjust as needed
+    const postsPerPage = 10; // Adjust as needed
 
     useEffect(() => {
         fetch(`${SITE_URL}/wp-json/an/posts/all/courses?page=${currentPage}`)

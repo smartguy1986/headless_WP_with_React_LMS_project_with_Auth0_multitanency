@@ -5,7 +5,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
 
 const Homepage = () => {
-  const { isAuthenticated, isLoading, handleRedirectCallback } = useAuth0();
+  const { isAuthenticated, isLoading, handleRedirectCallback, error } = useAuth0();
   const navigate = useNavigate();
 
   useEffect(() => {
