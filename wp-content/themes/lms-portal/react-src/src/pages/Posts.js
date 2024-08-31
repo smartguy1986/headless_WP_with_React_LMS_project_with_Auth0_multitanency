@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Typography, Pagination } from '@mui/material'
+import { Container, Pagination, Card, CardContent, Typography, Button, Grid, Box } from '@mui/material'
 import { SITE_URL } from '../Constants';
+import moment from 'moment';
 
 export const Posts = () => {
     const [posts, setPosts] = useState([]);
@@ -30,19 +31,30 @@ export const Posts = () => {
             <Typography variant="h2" gutterBottom>
                 All Posts
             </Typography>
-            {posts.map(post => (
-                <div key={post.ID}>
-                    <Typography variant="h4">{post.post_title}</Typography>
-                    {/* <Typography variant="body1" dangerouslySetInnerHTML={{ __html: post.post_content }}></Typography> */}
-                    {/* Add more post details */}
-                </div>
-
-            ))}
-            <Pagination
-                count={Math.ceil(posts.length / postsPerPage)}
-                page={currentPage}
-                onChange={handleChangePage}
-            />
+            <Grid container spacing={3} justifyContent="center">
+                {posts.map((course) => (
+                    <Grid item xs={12} sm={6} md={4} key={course.ID}>
+                        <Card variant="outlined">
+                            <CardContent>
+                                <Typography variant="h6" gutterBottom>
+                                    {course.post_title}
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary" gutterBottom>
+                                    Published on: {moment(course.post_date).format('MMMM Do, YYYY')}
+                                </Typography>
+                                <Typography variant="body1" component="p" gutterBottom>
+                                    {course.post_excerpt || 'No excerpt available.'}
+                                </Typography>
+                                <Box mt={2}>
+                                    <Button variant="contained" color="primary" href={course.guid}>
+                                        See More
+                                    </Button>
+                                </Box>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                ))}
+            </Grid>
         </Container>
     )
 }

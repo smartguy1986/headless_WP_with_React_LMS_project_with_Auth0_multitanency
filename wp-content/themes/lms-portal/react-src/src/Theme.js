@@ -15,16 +15,16 @@ const theme = createTheme({
     //   main: '#303633',
     // },
     primary: {
-      main: '#fffff7 ',
+      main: '#ffffff ',
     },
     secondary: {
-      main: '#fffff7',
+      main: '#ffffff',
     },
     background: {
-      default: '#fffff7',
+      default: '#ffffff',
     },
     warning: {
-      main: '#fffff7',
+      main: '#ffffff',
     },
   },
 });

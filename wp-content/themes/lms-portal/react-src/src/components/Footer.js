@@ -1,25 +1,27 @@
 import React from 'react';
-import { Box, Grid } from '@mui/material';
+import { AppBar, Box, Toolbar, Typography, Grid, Container } from '@mui/material';
 import Weather from '../inc/weather-info/Weatherinfo';
 
 const Footer = () => {
   return (
-    <Box
-      position="fixed"
-      bottom={0}
-      width="100%"
-      bgcolor="#01204E"
-      color="white"
-      textAlign="center"
-      py={3}
-    >
-      <div variant="body1">
-        <Grid container spacing={2}>
-          <Grid xs={6}>© 2024 My Website. All rights reserved.</Grid>
-          <Grid xs={6}><Weather /></Grid>
-        </Grid>
-      </div>
-    </Box>
+    <AppBar position="static" className="footer">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <Grid container spacing={2} alignItems="center">
+              <Grid item xs={6}>
+                <Typography variant="body1" color="inherit">
+                  © 2024 My Website. All rights reserved.
+                </Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Weather />
+              </Grid>
+            </Grid>
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 };
 

@@ -59,10 +59,10 @@ const Header = () => {
   }
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" className="header">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Box sx={{ display: { md: 'flex' }, mr: 1 }}>
+          <Box sx={{ display: 'flex', mr: 2 }}>
             <img
               src={logoURL}
               alt="Logo"
@@ -76,22 +76,22 @@ const Header = () => {
             noWrap
             component="div"
             sx={{
-              flexGrow: 1,
-              display: { md: 'flex' },
+              display: 'flex',
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
+              mr: 2,
             }}
           >
             Moucasa LMS
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'left' }}>
+          <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
             <Stack direction="row" spacing={2}>
-              <Button color="inherit" onClick={() => navigate('/')} variant="outlined">Home</Button>
-              <Button color="inherit" onClick={() => navigate('/contact')} variant="outlined">Contact</Button>
+              <Button color="inherit" onClick={() => navigate('/')} variant="outlined" className='primaryButton'>Home</Button>
+              <Button color="inherit" onClick={() => navigate('/contact')} variant="outlined" className='primaryButton'>Contact</Button>
             </Stack>
           </Box>
 

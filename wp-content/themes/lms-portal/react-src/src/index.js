@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import Auth0ProviderWithHistory from './auth/auth0-provider-with-history';
+import './style/syle.css';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
